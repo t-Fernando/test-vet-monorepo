@@ -1,11 +1,26 @@
 import Link from "next/link";
-import { db } from "~/server/db";
-import { userTable } from "~/server/db/schema";
+// import { db } from "@repo/drizzledb/db";
+import { publicCategoryTable } from "@repo/drizzledb/schema";
+import { createClient } from "@tursodatabase/api";
+import { env } from "~/env";
 
+//! add this to void horrible next cache ):
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+const turso = createClient({
+  token: env.PLATFORM_TOKEN,
+  org: "tfernandog",
+});
 export default async function HomePage() {
-  await db.insert(userTable).values({
-    name: "Fernando",
-  });
+  const instances = await turso.databases.list();
+  console.log(instances);
+
+  // await db.insert(publicCategoryTable).values({
+  //   name: "Dan estuvo aqui",
+  // });
+  // const categories = await db.select().from(publicCategoryTable).all();
+  // console.log({ categories });
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">

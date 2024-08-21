@@ -1,11 +1,11 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "892c6f7c-4a91-4faa-bfe4-bb9a13b2c18d",
-  "prevId": "d0cbdff1-0d12-4c54-b769-1086fc9f900c",
+  "id": "cdb4fd9c-7a37-429d-9c41-4a860c5fb8cb",
+  "prevId": "c81bb667-8a35-4a90-ac00-bad62dd0cc00",
   "tables": {
-    "category": {
-      "name": "category",
+    "user": {
+      "name": "user",
       "columns": {
         "id": {
           "name": "id",
@@ -20,25 +20,9 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "user": {
-      "name": "user",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": true
         },
-        "name": {
-          "name": "name",
+        "email": {
+          "name": "email",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -56,5 +40,8 @@
     "schemas": {},
     "tables": {},
     "columns": {}
+  },
+  "internal": {
+    "indexes": {}
   }
 }
