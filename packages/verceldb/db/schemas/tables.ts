@@ -8,25 +8,22 @@ import {
 } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 
-// Category;
+// Common section
+
 export const categoryTable = pgTable('category', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: varchar('name'),
 });
-
 export type InsertCategory = typeof categoryTable.$inferInsert;
 export type SelectCategory = typeof categoryTable.$inferSelect;
 
-// Brand
 export const brandTable = pgTable('brand', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: varchar('name'),
 });
-
 export type InsertBrand = typeof brandTable.$inferInsert;
 export type SelectBrand = typeof brandTable.$inferSelect;
 
-// Laboratory
 export const laboratoryTable = pgTable('laboratory', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: varchar('name'),
@@ -34,11 +31,9 @@ export const laboratoryTable = pgTable('laboratory', {
   phone: varchar('phone'),
   email: varchar('email'),
 });
-
 export type InsertLaboratory = typeof laboratoryTable.$inferInsert;
 export type SelectLaboratory = typeof laboratoryTable.$inferSelect;
 
-// Medicine
 export const medicineTable = pgTable('medicine', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: varchar('name'),
@@ -57,12 +52,10 @@ export const medicineTable = pgTable('medicine', {
   activeIngredients: varchar('active_ingredients'),
   suggestedPrice: real('suggested_price'),
 });
-
 export type InsertMedicine = typeof medicineTable.$inferInsert;
 export type SelectMedicine = typeof medicineTable.$inferSelect;
 
 //! Vaccine is the same as Medicine, add type field on Medicine instead?
-// Vaccine
 export const vaccineTable = pgTable('vaccine', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: varchar('name'),
@@ -81,13 +74,10 @@ export const vaccineTable = pgTable('vaccine', {
   activeIngredients: varchar('active_ingredients'),
   suggestedPrice: real('suggested_price'),
 });
-
 export type InsertVaccine = typeof vaccineTable.$inferInsert;
 export type SelectVaccine = typeof vaccineTable.$inferSelect;
 
-// Product
 export const productType = pgEnum('product_type', ['simple', 'multiple']);
-
 export const productTable = pgTable('product', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: varchar('name'),
@@ -107,11 +97,9 @@ export const productTable = pgTable('product', {
   searchKeywords: varchar('search_keywords').$type<string[]>(),
   similarProducts: varchar('similar_products').$type<string[]>(),
 });
-
 export type InsertProduct = typeof productTable.$inferInsert;
 export type SelectProduct = typeof productTable.$inferSelect;
 
-// Dewormer
 export const dewormerTable = pgTable('dewormer', {
   id: uuid('id').primaryKey().defaultRandom(),
   type: varchar('type'),
@@ -122,3 +110,7 @@ export const dewormerTable = pgTable('dewormer', {
     .notNull()
     .default(sql`ARRAY[]::text[]`), // no reference
 });
+export type InsertDewormer = typeof dewormerTable.$inferInsert;
+export type SelectDewormer = typeof dewormerTable.$inferSelect;
+
+//Subscription management
