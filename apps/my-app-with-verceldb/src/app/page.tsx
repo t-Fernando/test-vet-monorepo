@@ -1,32 +1,18 @@
 import Link from "next/link";
-// import { db } from "@repo/drizzledb/db";
-import { publicCategoryTable } from "@repo/drizzledb/schema";
-import { createClient } from "@tursodatabase/api";
-import { env } from "~/env";
+import { db } from "@repo/verceldb/db";
+import { publicCategoryTable } from "@repo/verceldb/schema";
 
-//! add this to void horrible next cache ):
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
-const turso = createClient({
-  token: env.PLATFORM_TOKEN,
-  org: "tfernandog",
-});
 export default async function HomePage() {
-  const instances = await turso.databases.list();
-  console.log(instances);
-
-  // await db.insert(publicCategoryTable).values({
-  //   name: "Dan estuvo aqui",
-  // });
-  // const categories = await db.select().from(publicCategoryTable).all();
-  // console.log({ categories });
+  const categories = await db.select().from(publicCategoryTable);
+  console.log(`From app on monorepo: `);
+  console.log({ categories });
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-        <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
+        <h1 className="text-center text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
           This app uses the{" "}
-          <span className="text-[hsl(280,100%,70%)]">clinic DB</span> (SQLite)
+          <span className="text-[hsl(280,100%,70%)]">public DB</span>{" "}
+          (postgreSQL)
         </h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
           <Link

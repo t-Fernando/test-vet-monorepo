@@ -1,4 +1,4 @@
-# schemas
+# verceldb
 
 To install dependencies:
 

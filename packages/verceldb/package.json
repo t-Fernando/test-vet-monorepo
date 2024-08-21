@@ -1,0 +1,18 @@
+{
+  "name": "@repo/verceldb",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./db": "./db/index.ts",
+    "./schema": "./db/schemas.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "postgres": "^3.4.4"
+  }
+}
