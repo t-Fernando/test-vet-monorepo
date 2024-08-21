@@ -1,5 +1,5 @@
 import { db } from './db';
-import { publicCategoryTable } from './db/schemas';
+import { categoryTable } from './db/schemas/tables';
 
-const categories = await db.select().from(publicCategoryTable);
+const categories = await db.select().from(categoryTable);
 console.log({ categories });
