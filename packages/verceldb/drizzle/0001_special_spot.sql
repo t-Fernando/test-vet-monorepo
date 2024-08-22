@@ -1,0 +1,1 @@
+ALTER TABLE "medication" ALTER COLUMN "type" SET NOT NULL;

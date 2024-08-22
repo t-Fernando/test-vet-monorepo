@@ -1,8 +1,16 @@
+import { db } from "@repo/verceldb/db";
+import { medication } from "@repo/verceldb/schema";
+
 //! add this to void horrible next cache ):
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function HomePage() {
+  // await db.insert(medicineTable).values({
+  //   name: " medicine test 1",
+  //   testsIds: ["1", "2"],
+  //   categoriesIds: [],
+  // });
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">

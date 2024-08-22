@@ -1,6 +1,6 @@
 {
-  "id": "6fd39592-d5c3-4bc1-bb06-4fb77aca4643",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "f58af5d4-8cb6-4979-9a51-ad0814b42871",
+  "prevId": "6fd39592-d5c3-4bc1-bb06-4fb77aca4643",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -222,7 +222,7 @@
           "type": "medication_type",
           "typeSchema": "public",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},

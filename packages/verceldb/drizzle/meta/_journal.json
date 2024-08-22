@@ -5,8 +5,15 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1724281919274,
-      "tag": "0000_deep_loners",
+      "when": 1724288503934,
+      "tag": "0000_soft_dragon_lord",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1724288616151,
+      "tag": "0001_special_spot",
       "breakpoints": true
     }
   ]

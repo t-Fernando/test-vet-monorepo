@@ -1,17 +1,17 @@
 import { relations } from 'drizzle-orm';
-import { brandTable, productTable } from './tables';
+import { brand, product } from './tables';
 
-export const brandRelations = relations(brandTable, ({ many }) => {
+export const brandRelations = relations(brand, ({ many }) => {
   return {
-    product: many(productTable),
+    product: many(product),
   };
 });
 
-export const productRelations = relations(productTable, ({ one }) => {
+export const productRelations = relations(product, ({ one }) => {
   return {
-    brand: one(brandTable, {
-      fields: [productTable.brandId],
-      references: [brandTable.id],
+    brand: one(brand, {
+      fields: [product.brandId],
+      references: [brand.id],
     }),
   };
 });

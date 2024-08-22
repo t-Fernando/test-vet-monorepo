@@ -10,31 +10,35 @@ import { sql } from 'drizzle-orm';
 
 // Common section
 
-export const categoryTable = pgTable('category', {
+export const category = pgTable('category', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: varchar('name'),
 });
-export type InsertCategory = typeof categoryTable.$inferInsert;
-export type SelectCategory = typeof categoryTable.$inferSelect;
+export type InsertCategory = typeof category.$inferInsert;
+export type SelectCategory = typeof category.$inferSelect;
 
-export const brandTable = pgTable('brand', {
+export const brand = pgTable('brand', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: varchar('name'),
 });
-export type InsertBrand = typeof brandTable.$inferInsert;
-export type SelectBrand = typeof brandTable.$inferSelect;
+export type InsertBrand = typeof brand.$inferInsert;
+export type SelectBrand = typeof brand.$inferSelect;
 
-export const laboratoryTable = pgTable('laboratory', {
+export const laboratory = pgTable('laboratory', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: varchar('name'),
   address: varchar('address'),
   phone: varchar('phone'),
   email: varchar('email'),
 });
-export type InsertLaboratory = typeof laboratoryTable.$inferInsert;
-export type SelectLaboratory = typeof laboratoryTable.$inferSelect;
+export type InsertLaboratory = typeof laboratory.$inferInsert;
+export type SelectLaboratory = typeof laboratory.$inferSelect;
 
-export const medicineTable = pgTable('medicine', {
+export const medicationType = pgEnum('medication_type', [
+  'medicine',
+  'vaccine',
+]);
+export const medication = pgTable('medication', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: varchar('name'),
   description: varchar('description'),
@@ -43,7 +47,7 @@ export const medicineTable = pgTable('medicine', {
   categoriesIds: varchar('categories_ids')
     .$type<string[]>()
     .notNull()
-    .default(sql`ARRAY[]::text[]`), // no reference
+    .default(sql`ARRAY[]::text[]`),
   sku: varchar('sku'),
   image: varchar('image'),
   searchKeywords: varchar('search_keywords').$type<string[]>(),
@@ -51,34 +55,13 @@ export const medicineTable = pgTable('medicine', {
   similarMedications: varchar('similar_medications').$type<string[]>(),
   activeIngredients: varchar('active_ingredients'),
   suggestedPrice: real('suggested_price'),
+  type: medicationType('type').notNull(),
 });
-export type InsertMedicine = typeof medicineTable.$inferInsert;
-export type SelectMedicine = typeof medicineTable.$inferSelect;
-
-//! Vaccine is the same as Medicine, add type field on Medicine instead?
-export const vaccineTable = pgTable('vaccine', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  name: varchar('name'),
-  description: varchar('description'),
-  satKey: varchar('satKey'),
-  barCode: varchar('barCode'),
-  categoriesIds: varchar('categories_ids')
-    .$type<string[]>()
-    .notNull()
-    .default(sql`ARRAY[]::text[]`), // no reference
-  sku: varchar('sku'),
-  image: varchar('image'),
-  searchKeywords: varchar('search_keywords').$type<string[]>(),
-  controlled: boolean('controlled'),
-  similarVaccineds: varchar('similar_vaccines').$type<string[]>(),
-  activeIngredients: varchar('active_ingredients'),
-  suggestedPrice: real('suggested_price'),
-});
-export type InsertVaccine = typeof vaccineTable.$inferInsert;
-export type SelectVaccine = typeof vaccineTable.$inferSelect;
+export type InsertMedication = typeof medication.$inferInsert;
+export type SelectMedication = typeof medication.$inferSelect;
 
 export const productType = pgEnum('product_type', ['simple', 'multiple']);
-export const productTable = pgTable('product', {
+export const product = pgTable('product', {
   id: uuid('id').primaryKey().defaultRandom(),
   name: varchar('name'),
   productType: productType('product_type'),
@@ -86,21 +69,21 @@ export const productTable = pgTable('product', {
   satKey: varchar('satKey'),
   barCode: varchar('barCode'),
   brandId: uuid('brand_id')
-    .references(() => brandTable.id)
+    .references(() => brand.id)
     .notNull(),
   categoriesIds: varchar('categories_ids')
     .$type<string[]>()
     .notNull()
-    .default(sql`ARRAY[]::text[]`), // no reference
+    .default(sql`ARRAY[]::text[]`),
   sku: varchar('sku'),
   image: varchar('image'),
   searchKeywords: varchar('search_keywords').$type<string[]>(),
   similarProducts: varchar('similar_products').$type<string[]>(),
 });
-export type InsertProduct = typeof productTable.$inferInsert;
-export type SelectProduct = typeof productTable.$inferSelect;
+export type InsertProduct = typeof product.$inferInsert;
+export type SelectProduct = typeof product.$inferSelect;
 
-export const dewormerTable = pgTable('dewormer', {
+export const dewormer = pgTable('dewormer', {
   id: uuid('id').primaryKey().defaultRandom(),
   type: varchar('type'),
   applicationPeriod: varchar('application_period'),
@@ -108,9 +91,9 @@ export const dewormerTable = pgTable('dewormer', {
   categoriesIds: varchar('categories_ids')
     .$type<string[]>()
     .notNull()
-    .default(sql`ARRAY[]::text[]`), // no reference
+    .default(sql`ARRAY[]::text[]`),
 });
-export type InsertDewormer = typeof dewormerTable.$inferInsert;
-export type SelectDewormer = typeof dewormerTable.$inferSelect;
+export type InsertDewormer = typeof dewormer.$inferInsert;
+export type SelectDewormer = typeof dewormer.$inferSelect;
 
 //Subscription management
