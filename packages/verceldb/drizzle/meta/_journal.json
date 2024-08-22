@@ -1,0 +1,69 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1724353574312,
+      "tag": "0000_mighty_gwen_stacy",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1724353604631,
+      "tag": "0001_tired_goblin_queen",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1724353675577,
+      "tag": "0002_mixed_warlock",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1724354147520,
+      "tag": "0003_peaceful_the_captain",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1724354401631,
+      "tag": "0004_big_moira_mactaggert",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1724354792039,
+      "tag": "0005_broad_shadowcat",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1724354895661,
+      "tag": "0006_eminent_hiroim",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1724355757095,
+      "tag": "0007_lying_onslaught",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1724356018881,
+      "tag": "0008_gigantic_vapor",
+      "breakpoints": true
+    }
+  ]
+}
