@@ -6,6 +6,8 @@ import {
   pgEnum,
   serial,
   integer,
+  timestamp,
+  index,
 } from 'drizzle-orm/pg-core';
 
 // Common section
@@ -38,6 +40,7 @@ export const medicationType = pgEnum('medication_type', [
   'medicine',
   'vaccine',
 ]);
+//! removed vaccine table and added type field here
 export const medication = pgTable('medication', {
   id: serial('id').primaryKey(),
   name: varchar('name').notNull(), //! changed to not null
@@ -88,3 +91,64 @@ export type InsertDewormer = typeof dewormer.$inferInsert;
 export type SelectDewormer = typeof dewormer.$inferSelect;
 
 //Subscription management
+
+export const owner = pgTable(
+  'owner',
+  {
+    id: serial('id').primaryKey(),
+    email: varchar('email').notNull(),
+    clinicId: integer('clinic_id')
+      .references(() => clinic.id)
+      .notNull(),
+    password: varchar('password').notNull(),
+  },
+  (table) => {
+    return {
+      idx: index('idx').on(table.id),
+      emailIdx: index('emailkey').on(table.email),
+    };
+  }
+);
+export type InsertOwner = typeof owner.$inferInsert;
+export type SelectOwner = typeof owner.$inferSelect;
+
+export const clinicServices = pgEnum('clininc_services', [
+  'clinic',
+  'store',
+  'groom',
+  'lodging',
+]);
+export const clinic = pgTable('clinic', {
+  id: serial('id').primaryKey(),
+  name: varchar('name').notNull(),
+  domain: varchar('name').notNull(),
+  services: clinicServices('services').array(),
+});
+export type InsertClinic = typeof clinic.$inferInsert;
+export type SelectClinic = typeof clinic.$inferSelect;
+
+export const subscription = pgTable('subscription', {
+  id: serial('id').primaryKey(),
+  name: varchar('name').notNull(),
+  licenses: integer('licenses').notNull(),
+  monthlyPrice: real('monthly_price').notNull(),
+});
+export type InsertSubscription = typeof subscription.$inferInsert;
+export type SelectSubscription = typeof subscription.$inferSelect;
+
+export const billingPeriod = pgEnum('billing_period', ['monthly', 'annual']);
+export const payment = pgTable('payment', {
+  id: serial('id').primaryKey(),
+  clinicId: integer('clinic_id')
+    .references(() => clinic.id)
+    .notNull(),
+  subscriptionId: integer('subscription_id')
+    .references(() => subscription.id)
+    .notNull(),
+  createdAt: timestamp('created_at', { mode: 'date' }).defaultNow(),
+  endDate: timestamp('end_date', { mode: 'date' }),
+  billingPeriod: billingPeriod('billing_period'),
+  totalAmount: real('total_amount'),
+});
+export type InsertPayment = typeof payment.$inferInsert;
+export type SelectPayment = typeof payment.$inferSelect;
