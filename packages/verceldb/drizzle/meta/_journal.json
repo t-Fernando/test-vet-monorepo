@@ -5,15 +5,22 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1724288503934,
-      "tag": "0000_soft_dragon_lord",
+      "when": 1724353574312,
+      "tag": "0000_mighty_gwen_stacy",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1724288616151,
-      "tag": "0001_special_spot",
+      "when": 1724353604631,
+      "tag": "0001_tired_goblin_queen",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1724353675577,
+      "tag": "0002_mixed_warlock",
       "breakpoints": true
     }
   ]

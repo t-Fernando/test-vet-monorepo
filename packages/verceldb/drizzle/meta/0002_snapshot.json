@@ -1,6 +1,6 @@
 {
-  "id": "c3868ae3-307a-4c00-b959-4a038a4dfea4",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "25ead820-0370-4393-a9b4-3b68062a81fb",
+  "prevId": "92c37f7e-0144-4298-8fa0-f1fb9b124bd0",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -62,7 +62,7 @@
           "name": "type",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "application_period": {
           "name": "application_period",
@@ -237,7 +237,7 @@
           "name": "name",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "product_type": {
           "name": "product_type",
@@ -263,6 +263,12 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
+        },
+        "brand_id": {
+          "name": "brand_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
         },
         "categories_ids": {
           "name": "categories_ids",
@@ -296,7 +302,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "product_brand_id_brand_id_fk": {
+          "name": "product_brand_id_brand_id_fk",
+          "tableFrom": "product",
+          "tableTo": "brand",
+          "columnsFrom": [
+            "brand_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     }

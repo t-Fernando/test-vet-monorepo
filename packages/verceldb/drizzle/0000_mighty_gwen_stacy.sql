@@ -11,65 +11,58 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "brand" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"name" varchar
+	"id" serial PRIMARY KEY NOT NULL,
+	"name" varchar NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "category" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"name" varchar
+	"id" serial PRIMARY KEY NOT NULL,
+	"name" varchar NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "dewormer" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"id" serial PRIMARY KEY NOT NULL,
 	"type" varchar,
 	"application_period" varchar,
 	"suggested_price" real,
-	"categories_ids" varchar DEFAULT ARRAY[]::text[] NOT NULL
+	"categories_ids" integer[] NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "laboratory" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"name" varchar,
-	"address" varchar,
+	"id" serial PRIMARY KEY NOT NULL,
+	"name" varchar NOT NULL,
+	"address" varchar NOT NULL,
 	"phone" varchar,
 	"email" varchar
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "medication" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"name" varchar,
+	"id" serial PRIMARY KEY NOT NULL,
+	"name" varchar NOT NULL,
 	"description" varchar,
 	"satKey" varchar,
 	"barCode" varchar,
-	"categories_ids" varchar DEFAULT ARRAY[]::text[] NOT NULL,
+	"categories_ids" integer[] NOT NULL,
 	"sku" varchar,
 	"image" varchar,
-	"search_keywords" varchar,
+	"search_keywords" varchar[],
 	"controlled" boolean,
-	"similar_medications" varchar,
+	"similar_medications" varchar[],
 	"active_ingredients" varchar,
 	"suggested_price" real,
-	"type" "medication_type"
+	"type" "medication_type" NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "product" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"id" serial PRIMARY KEY NOT NULL,
 	"name" varchar,
 	"product_type" "product_type",
 	"description" varchar,
 	"satKey" varchar,
 	"barCode" varchar,
-	"brand_id" uuid NOT NULL,
-	"categories_ids" varchar DEFAULT ARRAY[]::text[] NOT NULL,
+	"categories_ids" integer[] NOT NULL,
 	"sku" varchar,
 	"image" varchar,
-	"search_keywords" varchar,
-	"similar_products" varchar
+	"search_keywords" varchar[],
+	"similar_products" varchar[]
 );
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "product" ADD CONSTRAINT "product_brand_id_brand_id_fk" FOREIGN KEY ("brand_id") REFERENCES "public"."brand"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;

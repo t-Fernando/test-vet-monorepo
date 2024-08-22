@@ -2,32 +2,32 @@ import {
   boolean,
   pgTable,
   real,
-  uuid,
   varchar,
   pgEnum,
+  serial,
+  integer,
 } from 'drizzle-orm/pg-core';
-import { sql } from 'drizzle-orm';
 
 // Common section
 
 export const category = pgTable('category', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  name: varchar('name'),
+  id: serial('id').primaryKey(),
+  name: varchar('name').notNull(), //! changed to not null
 });
 export type InsertCategory = typeof category.$inferInsert;
 export type SelectCategory = typeof category.$inferSelect;
 
 export const brand = pgTable('brand', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  name: varchar('name'),
+  id: serial('id').primaryKey(),
+  name: varchar('name').notNull(), //! changed to not null
 });
 export type InsertBrand = typeof brand.$inferInsert;
 export type SelectBrand = typeof brand.$inferSelect;
 
 export const laboratory = pgTable('laboratory', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  name: varchar('name'),
-  address: varchar('address'),
+  id: serial('id').primaryKey(),
+  name: varchar('name').notNull(), //! changed to not null
+  address: varchar('address').notNull(), //! changed to not null
   phone: varchar('phone'),
   email: varchar('email'),
 });
@@ -39,20 +39,17 @@ export const medicationType = pgEnum('medication_type', [
   'vaccine',
 ]);
 export const medication = pgTable('medication', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  name: varchar('name'),
+  id: serial('id').primaryKey(),
+  name: varchar('name').notNull(), //! changed to not null
   description: varchar('description'),
   satKey: varchar('satKey'),
   barCode: varchar('barCode'),
-  categoriesIds: varchar('categories_ids')
-    .$type<string[]>()
-    .notNull()
-    .default(sql`ARRAY[]::text[]`),
+  categoriesIds: integer('categories_ids').array().notNull(),
   sku: varchar('sku'),
   image: varchar('image'),
-  searchKeywords: varchar('search_keywords').$type<string[]>(),
+  searchKeywords: varchar('search_keywords').array(),
   controlled: boolean('controlled'),
-  similarMedications: varchar('similar_medications').$type<string[]>(),
+  similarMedications: varchar('similar_medications').array(),
   activeIngredients: varchar('active_ingredients'),
   suggestedPrice: real('suggested_price'),
   type: medicationType('type').notNull(),
@@ -62,36 +59,30 @@ export type SelectMedication = typeof medication.$inferSelect;
 
 export const productType = pgEnum('product_type', ['simple', 'multiple']);
 export const product = pgTable('product', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  name: varchar('name'),
+  id: serial('id').primaryKey(),
+  name: varchar('name').notNull(),
   productType: productType('product_type'),
   description: varchar('description'),
   satKey: varchar('satKey'),
   barCode: varchar('barCode'),
-  brandId: uuid('brand_id')
+  brandId: integer('brand_id')
     .references(() => brand.id)
     .notNull(),
-  categoriesIds: varchar('categories_ids')
-    .$type<string[]>()
-    .notNull()
-    .default(sql`ARRAY[]::text[]`),
+  categoriesIds: integer('categories_ids').array().notNull(),
   sku: varchar('sku'),
   image: varchar('image'),
-  searchKeywords: varchar('search_keywords').$type<string[]>(),
-  similarProducts: varchar('similar_products').$type<string[]>(),
+  searchKeywords: varchar('search_keywords').array(),
+  similarProducts: varchar('similar_products').array(),
 });
 export type InsertProduct = typeof product.$inferInsert;
 export type SelectProduct = typeof product.$inferSelect;
 
 export const dewormer = pgTable('dewormer', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  type: varchar('type'),
+  id: serial('id').primaryKey(),
+  type: varchar('type').notNull(), //! changed to not null
   applicationPeriod: varchar('application_period'),
   suggestedPrice: real('suggested_price'),
-  categoriesIds: varchar('categories_ids')
-    .$type<string[]>()
-    .notNull()
-    .default(sql`ARRAY[]::text[]`),
+  categoriesIds: integer('categories_ids').array().notNull(),
 });
 export type InsertDewormer = typeof dewormer.$inferInsert;
 export type SelectDewormer = typeof dewormer.$inferSelect;

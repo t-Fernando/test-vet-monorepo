@@ -1,6 +1,6 @@
 {
-  "id": "f58af5d4-8cb6-4979-9a51-ad0814b42871",
-  "prevId": "6fd39592-d5c3-4bc1-bb06-4fb77aca4643",
+  "id": "92c37f7e-0144-4298-8fa0-f1fb9b124bd0",
+  "prevId": "c3868ae3-307a-4c00-b959-4a038a4dfea4",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -10,16 +10,15 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "name": {
           "name": "name",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -33,16 +32,15 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "name": {
           "name": "name",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -56,10 +54,9 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "type": {
           "name": "type",
@@ -81,10 +78,9 @@
         },
         "categories_ids": {
           "name": "categories_ids",
-          "type": "varchar",
+          "type": "integer[]",
           "primaryKey": false,
-          "notNull": true,
-          "default": "ARRAY[]::text[]"
+          "notNull": true
         }
       },
       "indexes": {},
@@ -98,22 +94,21 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "name": {
           "name": "name",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "address": {
           "name": "address",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "phone": {
           "name": "phone",
@@ -139,16 +134,15 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "name": {
           "name": "name",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "description": {
           "name": "description",
@@ -170,10 +164,9 @@
         },
         "categories_ids": {
           "name": "categories_ids",
-          "type": "varchar",
+          "type": "integer[]",
           "primaryKey": false,
-          "notNull": true,
-          "default": "ARRAY[]::text[]"
+          "notNull": true
         },
         "sku": {
           "name": "sku",
@@ -189,7 +182,7 @@
         },
         "search_keywords": {
           "name": "search_keywords",
-          "type": "varchar",
+          "type": "varchar[]",
           "primaryKey": false,
           "notNull": false
         },
@@ -201,7 +194,7 @@
         },
         "similar_medications": {
           "name": "similar_medications",
-          "type": "varchar",
+          "type": "varchar[]",
           "primaryKey": false,
           "notNull": false
         },
@@ -236,10 +229,9 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
+          "type": "serial",
           "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "name": {
           "name": "name",
@@ -274,16 +266,15 @@
         },
         "brand_id": {
           "name": "brand_id",
-          "type": "uuid",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
         "categories_ids": {
           "name": "categories_ids",
-          "type": "varchar",
+          "type": "integer[]",
           "primaryKey": false,
-          "notNull": true,
-          "default": "ARRAY[]::text[]"
+          "notNull": true
         },
         "sku": {
           "name": "sku",
@@ -299,13 +290,13 @@
         },
         "search_keywords": {
           "name": "search_keywords",
-          "type": "varchar",
+          "type": "varchar[]",
           "primaryKey": false,
           "notNull": false
         },
         "similar_products": {
           "name": "similar_products",
-          "type": "varchar",
+          "type": "varchar[]",
           "primaryKey": false,
           "notNull": false
         }
