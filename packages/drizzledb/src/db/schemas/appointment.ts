@@ -1,6 +1,6 @@
 import { relations, sql } from 'drizzle-orm';
 import { integer, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
-import { client, pet, reminder, user } from '.';
+import { client, consultation, pet, reminder, user } from '.';
 
 export const appointment = sqliteTable('appointment', {
   id: integer('id').primaryKey({ autoIncrement: true }),
@@ -45,5 +45,6 @@ export const appointmentRelations = relations(appointment, ({ one, many }) => {
       references: [user.id],
     }),
     reminder: many(reminder),
+    consultation: many(consultation),
   };
 });

@@ -12,3 +12,8 @@ export { cartItem } from './cartItem';
 export { grooming } from './grooming';
 export { appointment } from './appointment';
 export { reminder } from './reminder';
+export { consultation } from './consultation';
+export { physicalExam } from './physicalExam';
+export { damnitExam } from './dmnitExam';
+export { valveAndOphthalmicExam } from './valveAndOphthalmicExam';
+export { mucosalExam } from './mucosalExam';

@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1724439860405,
-      "tag": "0000_slim_night_nurse",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1724440076158,
-      "tag": "0001_silly_mongoose",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1724442662887,
-      "tag": "0002_blushing_smiling_tiger",
+      "when": 1724452982090,
+      "tag": "0000_lovely_roulette",
       "breakpoints": true
     }
   ]

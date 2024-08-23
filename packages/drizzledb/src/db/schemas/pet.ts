@@ -1,6 +1,12 @@
 import { relations, sql } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
-import { appointment, petDeworming, petToClient, petVaccination } from '.';
+import {
+  appointment,
+  consultation,
+  petDeworming,
+  petToClient,
+  petVaccination,
+} from '.';
 
 // Pet - Client section
 
@@ -41,5 +47,6 @@ export const petRelations = relations(pet, ({ many }) => {
     petVaccination: many(petVaccination),
     petToClient: many(petToClient),
     appointment: many(appointment),
+    consultation: many(consultation),
   };
 });

@@ -1,6 +1,7 @@
 import { relations, sql } from 'drizzle-orm';
 import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import { appointment } from './appointment';
+import { consultation } from './consultation';
 
 export type UserModules = 'clinic' | 'cash_desk' | 'agenda' | 'consultations';
 
@@ -37,5 +38,6 @@ export type SelectUser = typeof user.$inferSelect;
 export const userRelations = relations(user, ({ many }) => {
   return {
     appointment: many(appointment),
+    consultation: many(consultation),
   };
 });

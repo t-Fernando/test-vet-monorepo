@@ -1,13 +1,15 @@
 import { relations, sql } from 'drizzle-orm';
 import { integer, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
-import { cartItem, client, paymentHistory } from '.';
+import { cartItem, client, consultation, paymentHistory } from '.';
 
 export const ticket = sqliteTable('ticket', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   clientId: integer('client_id')
     .references(() => client.id)
     .notNull(),
-  //TODO: consolutationId
+  consolutationId: integer('consultation_id')
+    .references(() => consultation.id)
+    .notNull(),
   createdAt: text('created_at')
     .notNull()
     .default(sql`current_timestamp`),
@@ -23,6 +25,10 @@ export const ticketRelations = relations(ticket, ({ one, many }) => {
     client: one(client, {
       fields: [ticket.clientId],
       references: [client.id],
+    }),
+    consultation: one(consultation, {
+      fields: [ticket.consolutationId],
+      references: [consultation.id],
     }),
     paymentHistory: many(paymentHistory),
     cartItem: many(cartItem),
