@@ -15,6 +15,13 @@
       "when": 1724430215581,
       "tag": "0001_brainy_roulette",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1724437555625,
+      "tag": "0002_wakeful_silver_surfer",
+      "breakpoints": true
     }
   ]
 }

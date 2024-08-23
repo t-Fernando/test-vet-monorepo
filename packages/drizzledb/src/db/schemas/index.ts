@@ -5,3 +5,4 @@ export { petDeworming } from './petDeworming';
 export { petToClient } from './petToClient';
 export { petVaccination } from './petVaccination';
 export { taxInformation } from './taxInformation';
+export { user } from './user';

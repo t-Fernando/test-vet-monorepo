@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { db } from "@repo/drizzledb/db";
-import { client, pet, petToClient } from "@repo/drizzledb/schema";
+import { client, pet, petToClient, user } from "@repo/drizzledb/schema";
 import { createClient } from "@tursodatabase/api";
 import { env } from "~/env";
 
@@ -16,16 +16,13 @@ export default async function HomePage() {
   // const instances = await turso.databases.list();
   // console.log(instances);
 
-  await db.insert(pet).values({
-    name: "Wacha",
-    color: "black",
-    gender: "female",
-    race: "unknown",
-    size: "small",
-    species: "cat",
-    state: ["rescued"],
-    birthdate: "2015-01-01",
-  });
+  // await db.insert(user).values({
+  //   email: "user@email.com",
+  //   fullName: "User full name",
+  //   password: " user password",
+  //   phone: "7717029729",
+  //   role: "owner",
+  // });
   // await db.insert(client).values({
   //   contactMethid: "whatsapp",
   //   email: "troy@email.com",
