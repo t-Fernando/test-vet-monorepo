@@ -8,6 +8,13 @@
       "when": 1724452982090,
       "tag": "0000_lovely_roulette",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1724455042208,
+      "tag": "0001_cold_ironclad",
+      "breakpoints": true
     }
   ]
 }

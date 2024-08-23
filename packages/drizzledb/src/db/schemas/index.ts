@@ -17,3 +17,8 @@ export { physicalExam } from './physicalExam';
 export { damnitExam } from './dmnitExam';
 export { valveAndOphthalmicExam } from './valveAndOphthalmicExam';
 export { mucosalExam } from './mucosalExam';
+export { prescriptionItem } from './prescriptionItem';
+export { medicalFile } from './medicalFile';
+export { prescription } from './prescription';
+export { medicalStudy } from './medicalStudy';
+export { provider } from './provider';
