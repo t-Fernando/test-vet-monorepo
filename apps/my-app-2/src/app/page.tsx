@@ -1,6 +1,6 @@
 import Link from "next/link";
-// import { db } from "@repo/drizzledb/db";
-import { publicCategoryTable } from "@repo/drizzledb/schema";
+import { db } from "@repo/drizzledb/db";
+import { client, pet, petToClient } from "@repo/drizzledb/schema";
 import { createClient } from "@tursodatabase/api";
 import { env } from "~/env";
 
@@ -8,19 +8,32 @@ import { env } from "~/env";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const turso = createClient({
-  token: env.PLATFORM_TOKEN,
-  org: "tfernandog",
-});
+// const turso = createClient({
+//   token: env.PLATFORM_TOKEN,
+//   org: "tfernandog",
+// });
 export default async function HomePage() {
-  const instances = await turso.databases.list();
-  console.log(instances);
+  // const instances = await turso.databases.list();
+  // console.log(instances);
 
-  // await db.insert(publicCategoryTable).values({
-  //   name: "Dan estuvo aqui",
+  // await db.insert(pet).values({
+  //   name: "Sam",
+  //   color: "salt and pepper",
+  //   gender: "male",
+  //   race: "schnawtzer",
+  //   size: "medium",
+  //   species: "dog",
+  //   state: ["deceased"],
+  //   birthdate: "2010-01-01",
   // });
-  // const categories = await db.select().from(publicCategoryTable).all();
-  // console.log({ categories });
+  // await db.insert(client).values({
+  //   contactMethid: "whatsapp",
+  //   email: "troy@email.com",
+  //   fullName: "Troy Gomez",
+  //   phone: "7717029729",
+  // });
+  const data = await db.select().from(client).all();
+  console.log({ data });
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
