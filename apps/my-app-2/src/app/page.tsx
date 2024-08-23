@@ -16,16 +16,16 @@ export default async function HomePage() {
   // const instances = await turso.databases.list();
   // console.log(instances);
 
-  // await db.insert(pet).values({
-  //   name: "Sam",
-  //   color: "salt and pepper",
-  //   gender: "male",
-  //   race: "schnawtzer",
-  //   size: "medium",
-  //   species: "dog",
-  //   state: ["deceased"],
-  //   birthdate: "2010-01-01",
-  // });
+  await db.insert(pet).values({
+    name: "Wacha",
+    color: "black",
+    gender: "female",
+    race: "unknown",
+    size: "small",
+    species: "cat",
+    state: ["rescued"],
+    birthdate: "2015-01-01",
+  });
   // await db.insert(client).values({
   //   contactMethid: "whatsapp",
   //   email: "troy@email.com",
