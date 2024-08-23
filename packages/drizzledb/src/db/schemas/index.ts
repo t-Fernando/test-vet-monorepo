@@ -6,3 +6,6 @@ export { petToClient } from './petToClient';
 export { petVaccination } from './petVaccination';
 export { taxInformation } from './taxInformation';
 export { user } from './user';
+export { ticket } from './ticket';
+export { paymentHistory } from './paymentHistory';
+export { cartItem } from './cartItem';
