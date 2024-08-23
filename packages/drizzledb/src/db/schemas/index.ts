@@ -9,3 +9,6 @@ export { user } from './user';
 export { ticket } from './ticket';
 export { paymentHistory } from './paymentHistory';
 export { cartItem } from './cartItem';
+export { grooming } from './grooming';
+export { appointment } from './appointment';
+export { reminder } from './reminder';

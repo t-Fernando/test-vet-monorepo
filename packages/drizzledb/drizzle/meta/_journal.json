@@ -15,6 +15,13 @@
       "when": 1724440076158,
       "tag": "0001_silly_mongoose",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1724442662887,
+      "tag": "0002_blushing_smiling_tiger",
+      "breakpoints": true
     }
   ]
 }
