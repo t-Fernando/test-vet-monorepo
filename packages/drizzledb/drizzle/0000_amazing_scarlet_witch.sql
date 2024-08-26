@@ -1,3 +1,12 @@
+CREATE TABLE `accessory` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`product_id` integer NOT NULL,
+	`name` text NOT NULL,
+	`description` text,
+	`price` real DEFAULT 0,
+	FOREIGN KEY (`product_id`) REFERENCES `product`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
 CREATE TABLE `appointment` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`pet_id` integer NOT NULL,
@@ -64,6 +73,30 @@ CREATE TABLE `credit_account` (
 	FOREIGN KEY (`client_id`) REFERENCES `client`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
+CREATE TABLE `dewormer` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`stock` integer DEFAULT 0,
+	`lot` text,
+	`purchase_date` text,
+	`expirity_date` text,
+	`branch` text,
+	`department` text,
+	`rack` text,
+	`purchace_price` real DEFAULT 0,
+	`utility` real DEFAULT 0,
+	`discount_percentage` real DEFAULT 0,
+	`discount_code` text,
+	`public_price` real DEFAULT 0
+);
+--> statement-breakpoint
+CREATE TABLE `dewormer_supplier` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`dewormerId` integer NOT NULL,
+	`supplierId` integer NOT NULL,
+	FOREIGN KEY (`dewormerId`) REFERENCES `dewormer`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`supplierId`) REFERENCES `supplier`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
 CREATE TABLE `damnit_exam` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`consultation_id` integer NOT NULL,
@@ -86,6 +119,49 @@ CREATE TABLE `grooming` (
 	`coat_type` text,
 	`services` text DEFAULT '[]',
 	`price` real DEFAULT 0
+);
+--> statement-breakpoint
+CREATE TABLE `medical_file` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`medical_study_id` integer NOT NULL,
+	`url` text,
+	`description` text,
+	FOREIGN KEY (`medical_study_id`) REFERENCES `medical_study`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
+CREATE TABLE `medical_study` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`provider_id` integer NOT NULL,
+	`consultation_id` integer NOT NULL,
+	`diagnosis` text,
+	`study_date` text DEFAULT (current_timestamp),
+	`general_state` text,
+	FOREIGN KEY (`provider_id`) REFERENCES `provider`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`consultation_id`) REFERENCES `consultation`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
+CREATE TABLE `medicine` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`stock` integer DEFAULT 0,
+	`lot` text,
+	`purchase_date` text,
+	`expirity_date` text,
+	`branch` text,
+	`department` text,
+	`rack` text,
+	`purchace_price` real DEFAULT 0,
+	`utility` real DEFAULT 0,
+	`discount_percentage` real DEFAULT 0,
+	`discount_code` text,
+	`public_price` real DEFAULT 0
+);
+--> statement-breakpoint
+CREATE TABLE `medicine_supplier` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`medicineId` integer NOT NULL,
+	`supplierId` integer NOT NULL,
+	FOREIGN KEY (`medicineId`) REFERENCES `medicine`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`supplierId`) REFERENCES `supplier`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
 CREATE TABLE `mucosal_exam` (
@@ -175,11 +251,68 @@ CREATE TABLE `physical_exam` (
 	FOREIGN KEY (`consultation_id`) REFERENCES `consultation`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
+CREATE TABLE `prescription` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`consultation_id` integer NOT NULL,
+	`veterinarian_id` integer NOT NULL,
+	`medical_instructions` text,
+	`created_at` text NOT NULL,
+	FOREIGN KEY (`consultation_id`) REFERENCES `consultation`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`veterinarian_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
+CREATE TABLE `prescription_item` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`prescription_id` integer NOT NULL,
+	`amount` real DEFAULT 0,
+	`frequency` text,
+	`duration` text,
+	`recommendations` text,
+	`type` text,
+	FOREIGN KEY (`prescription_id`) REFERENCES `prescription`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
+CREATE TABLE `product` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`stock` integer DEFAULT 0,
+	`purchase_date` text,
+	`expirity_date` text,
+	`branch` text,
+	`department` text,
+	`rack` text,
+	`purchace_price` real DEFAULT 0,
+	`utility` real DEFAULT 0,
+	`discount_percentage` real DEFAULT 0,
+	`discount_code` text,
+	`public_price` real DEFAULT 0
+);
+--> statement-breakpoint
+CREATE TABLE `product_supplier` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`productId` integer NOT NULL,
+	`supplierId` integer NOT NULL,
+	FOREIGN KEY (`productId`) REFERENCES `product`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`supplierId`) REFERENCES `supplier`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
+CREATE TABLE `provider` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`name` text NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE `reminder` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`appointment_id` integer NOT NULL,
 	`notify_before_of` text,
 	FOREIGN KEY (`appointment_id`) REFERENCES `appointment`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
+CREATE TABLE `supplier` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`name` text NOT NULL,
+	`address` text,
+	`phone` text,
+	`email` text
 );
 --> statement-breakpoint
 CREATE TABLE `tax_information` (
@@ -220,6 +353,30 @@ CREATE TABLE `user` (
 	`modules` text DEFAULT '[]'
 );
 --> statement-breakpoint
+CREATE TABLE `vaccine` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`stock` integer DEFAULT 0,
+	`lot` text,
+	`purchase_date` text,
+	`expirity_date` text,
+	`branch` text,
+	`department` text,
+	`rack` text,
+	`purchace_price` real DEFAULT 0,
+	`utility` real DEFAULT 0,
+	`discount_percentage` real DEFAULT 0,
+	`discount_code` text,
+	`public_price` real DEFAULT 0
+);
+--> statement-breakpoint
+CREATE TABLE `vaccine_supplier` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`vaccineId` integer NOT NULL,
+	`supplierId` integer NOT NULL,
+	FOREIGN KEY (`vaccineId`) REFERENCES `vaccine`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`supplierId`) REFERENCES `supplier`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
 CREATE TABLE `valve_and_ohthalmic_exam` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`consultation_id` integer NOT NULL,
@@ -234,6 +391,18 @@ CREATE TABLE `valve_and_ohthalmic_exam` (
 	FOREIGN KEY (`consultation_id`) REFERENCES `consultation`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
+CREATE TABLE `laboratory_order` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`provider_id` integer NOT NULL,
+	`consultation_id` integer NOT NULL,
+	`results_priority` text,
+	`deadline_date` text,
+	FOREIGN KEY (`provider_id`) REFERENCES `provider`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`consultation_id`) REFERENCES `consultation`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
 CREATE UNIQUE INDEX `user_email_unique` ON `user` (`email`);--> statement-breakpoint
-CREATE INDEX `idx` ON `user` (`id`);--> statement-breakpoint
-CREATE INDEX `email_idx` ON `user` (`email`);
+CREATE UNIQUE INDEX `idx` ON `user` (`id`);--> statement-breakpoint
+CREATE UNIQUE INDEX `email_idx` ON `user` (`email`);--> statement-breakpoint
+CREATE UNIQUE INDEX `vaccineIdx` ON `vaccine` (`id`);--> statement-breakpoint
+CREATE INDEX `lotIdx` ON `vaccine` (`lot`);

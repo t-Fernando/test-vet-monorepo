@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "c624735e-8057-486b-bd2c-ae334552e8d4",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "8ba65a30-fd1b-4240-9d05-b145a7e9c8df",
+  "prevId": "63385220-30ec-4086-b4c5-a959c6fe733e",
   "tables": {
     "accessory": {
       "name": "accessory",
@@ -629,9 +629,38 @@
           "notNull": false,
           "autoincrement": false,
           "default": 0
+        },
+        "laboratoryId": {
+          "name": "laboratoryId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "dewormerId": {
+          "name": "dewormerId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "dewormerIdx": {
+          "name": "dewormerIdx",
+          "columns": [
+            "id"
+          ],
+          "isUnique": true
+        },
+        "dewormerLotIdx": {
+          "name": "dewormerLotIdx",
+          "columns": [
+            "lot"
+          ],
+          "isUnique": false
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
@@ -985,6 +1014,13 @@
           "primaryKey": true,
           "notNull": true,
           "autoincrement": true
+        },
+        "medicine_id": {
+          "name": "medicine_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
         },
         "stock": {
           "name": "stock",
@@ -1871,6 +1907,13 @@
           "notNull": true,
           "autoincrement": true
         },
+        "product_id": {
+          "name": "product_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "stock": {
           "name": "stock",
           "type": "integer",
@@ -2413,6 +2456,20 @@
           "primaryKey": true,
           "notNull": true,
           "autoincrement": true
+        },
+        "vaccine_id": {
+          "name": "vaccine_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "laboratoryId": {
+          "name": "laboratoryId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
         },
         "stock": {
           "name": "stock",

@@ -1,5 +1,11 @@
 import { relations, sql } from 'drizzle-orm';
-import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import {
+  index,
+  integer,
+  sqliteTable,
+  text,
+  uniqueIndex,
+} from 'drizzle-orm/sqlite-core';
 import { appointment } from './appointment';
 import { consultation } from './consultation';
 
@@ -24,8 +30,8 @@ export const user = sqliteTable(
   },
   (table) => {
     return {
-      idx: index('idx').on(table.id),
-      emailIdx: index('email_idx').on(table.email),
+      idx: uniqueIndex('idx').on(table.id),
+      emailIdx: uniqueIndex('email_idx').on(table.email),
     };
   }
 );
