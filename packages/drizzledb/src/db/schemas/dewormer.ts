@@ -1,4 +1,4 @@
-import { relations } from 'drizzle-orm';
+import { relations, sql } from 'drizzle-orm';
 import {
   integer,
   sqliteTable,
@@ -27,8 +27,14 @@ export const dewormer = sqliteTable(
     discountPercentage: real('discount_percentage').default(0),
     discountCode: text('discount_code'),
     publicPrice: real('public_price').default(0),
-    laboratoryId: integer('laboratoryId').notNull(), // id from public db
-    dewormerId: integer('dewormerId').notNull(), // id from public db
+    laboratoryId: integer('laboratoryId')
+      .notNull()
+      .$type<number[]>()
+      .default(sql`'[]'`), // id from public db
+    dewormerId: integer('dewormerId')
+      .notNull()
+      .$type<number[]>()
+      .default(sql`'[]'`), // id from public db
   },
   (table) => {
     return {

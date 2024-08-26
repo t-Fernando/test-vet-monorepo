@@ -1,4 +1,4 @@
-import { relations } from 'drizzle-orm';
+import { relations, sql } from 'drizzle-orm';
 import { sqliteTable, integer, text, real } from 'drizzle-orm/sqlite-core';
 import { medicineSupplier } from './medicineSupplier';
 import { cartItem } from './cartItem';
@@ -6,7 +6,10 @@ import { prescriptionItem } from './prescriptionItem';
 
 export const medicine = sqliteTable('medicine', {
   id: integer('id').primaryKey({ autoIncrement: true }),
-  medicineId: integer('medicine_id').notNull(), // id from public db
+  medicineId: integer('medicine_id')
+    .notNull()
+    .$type<number[]>()
+    .default(sql`'[]'`), // id from public db
   stock: integer('stock').default(0),
   lot: text('lot'), //! not index on Medicine?
   purchaseDate: text('purchase_date'), //Date

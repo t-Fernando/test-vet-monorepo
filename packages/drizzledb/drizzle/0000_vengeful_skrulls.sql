@@ -86,7 +86,9 @@ CREATE TABLE `dewormer` (
 	`utility` real DEFAULT 0,
 	`discount_percentage` real DEFAULT 0,
 	`discount_code` text,
-	`public_price` real DEFAULT 0
+	`public_price` real DEFAULT 0,
+	`laboratoryId` integer DEFAULT '[]' NOT NULL,
+	`dewormerId` integer DEFAULT '[]' NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE `dewormer_supplier` (
@@ -142,6 +144,7 @@ CREATE TABLE `medical_study` (
 --> statement-breakpoint
 CREATE TABLE `medicine` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`medicine_id` integer DEFAULT '[]' NOT NULL,
 	`stock` integer DEFAULT 0,
 	`lot` text,
 	`purchase_date` text,
@@ -274,6 +277,7 @@ CREATE TABLE `prescription_item` (
 --> statement-breakpoint
 CREATE TABLE `product` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`product_id` integer DEFAULT '[]' NOT NULL,
 	`stock` integer DEFAULT 0,
 	`purchase_date` text,
 	`expirity_date` text,
@@ -355,6 +359,8 @@ CREATE TABLE `user` (
 --> statement-breakpoint
 CREATE TABLE `vaccine` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`vaccine_id` integer DEFAULT '[]' NOT NULL,
+	`laboratoryId` integer DEFAULT '[]' NOT NULL,
 	`stock` integer DEFAULT 0,
 	`lot` text,
 	`purchase_date` text,
@@ -401,6 +407,8 @@ CREATE TABLE `laboratory_order` (
 	FOREIGN KEY (`consultation_id`) REFERENCES `consultation`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
+CREATE UNIQUE INDEX `dewormerIdx` ON `dewormer` (`id`);--> statement-breakpoint
+CREATE INDEX `dewormerLotIdx` ON `dewormer` (`lot`);--> statement-breakpoint
 CREATE UNIQUE INDEX `user_email_unique` ON `user` (`email`);--> statement-breakpoint
 CREATE UNIQUE INDEX `idx` ON `user` (`id`);--> statement-breakpoint
 CREATE UNIQUE INDEX `email_idx` ON `user` (`email`);--> statement-breakpoint

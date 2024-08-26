@@ -1,4 +1,4 @@
-import { relations } from 'drizzle-orm';
+import { relations, sql } from 'drizzle-orm';
 import {
   sqliteTable,
   integer,
@@ -16,8 +16,14 @@ export const vaccine = sqliteTable(
   'vaccine',
   {
     id: integer('id').primaryKey({ autoIncrement: true }),
-    vaccineId: integer('vaccine_id').notNull(), // id from public db
-    laboratoryId: integer('laboratoryId').notNull(), // id from public db
+    vaccineId: integer('vaccine_id')
+      .notNull()
+      .$type<number[]>()
+      .default(sql`'[]'`), // id from public db
+    laboratoryId: integer('laboratoryId')
+      .notNull()
+      .$type<number[]>()
+      .default(sql`'[]'`), // id from public db
     stock: integer('stock').default(0),
     lot: text('lot'),
     purchaseDate: text('purchase_date'), //Date
