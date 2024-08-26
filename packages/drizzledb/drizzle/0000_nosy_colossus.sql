@@ -28,12 +28,20 @@ CREATE TABLE `appointment` (
 CREATE TABLE `cart_item` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`ticket_id` integer NOT NULL,
+	`medicine_id` integer NOT NULL,
+	`product_id` integer NOT NULL,
+	`vaccine_id` integer NOT NULL,
+	`dewormer_id` integer NOT NULL,
 	`quantity` integer DEFAULT 0,
 	`price` real DEFAULT 0,
 	`debt` real DEFAULT 0,
 	`deposit` real DEFAULT 0,
 	`remaining_amount` real DEFAULT 0,
-	FOREIGN KEY (`ticket_id`) REFERENCES `ticket`(`id`) ON UPDATE no action ON DELETE no action
+	FOREIGN KEY (`ticket_id`) REFERENCES `ticket`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`medicine_id`) REFERENCES `medicine`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`product_id`) REFERENCES `product`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`vaccine_id`) REFERENCES `vaccine`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`dewormer_id`) REFERENCES `dewormer`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
 CREATE TABLE `client` (
@@ -73,6 +81,18 @@ CREATE TABLE `credit_account` (
 	FOREIGN KEY (`client_id`) REFERENCES `client`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
+CREATE TABLE `damnit_exam` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`consultation_id` integer NOT NULL,
+	`degenerative_disorders` text,
+	`eating_disorders` text,
+	`metabolic_disorders` text,
+	`neoplastic_disorders` text,
+	`infectious_diseases` text,
+	`traumatic_conditions` text,
+	FOREIGN KEY (`consultation_id`) REFERENCES `consultation`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
 CREATE TABLE `dewormer` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`stock` integer DEFAULT 0,
@@ -99,18 +119,6 @@ CREATE TABLE `dewormer_supplier` (
 	FOREIGN KEY (`supplierId`) REFERENCES `supplier`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
-CREATE TABLE `damnit_exam` (
-	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-	`consultation_id` integer NOT NULL,
-	`degenerative_disorders` text,
-	`eating_disorders` text,
-	`metabolic_disorders` text,
-	`neoplastic_disorders` text,
-	`infectious_diseases` text,
-	`traumatic_conditions` text,
-	FOREIGN KEY (`consultation_id`) REFERENCES `consultation`(`id`) ON UPDATE no action ON DELETE no action
-);
---> statement-breakpoint
 CREATE TABLE `grooming` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`service_type` text,
@@ -119,8 +127,20 @@ CREATE TABLE `grooming` (
 	`breed` text,
 	`size` text,
 	`coat_type` text,
+	`accesory_id` integer NOT NULL,
 	`services` text DEFAULT '[]',
-	`price` real DEFAULT 0
+	`price` real DEFAULT 0,
+	FOREIGN KEY (`accesory_id`) REFERENCES `accessory`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
+CREATE TABLE `laboratory_order` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`provider_id` integer NOT NULL,
+	`consultation_id` integer NOT NULL,
+	`results_priority` text,
+	`deadline_date` text,
+	FOREIGN KEY (`provider_id`) REFERENCES `provider`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`consultation_id`) REFERENCES `consultation`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
 CREATE TABLE `medical_file` (
@@ -212,8 +232,10 @@ CREATE TABLE `pet` (
 CREATE TABLE `pet_deworming` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`id_pet` integer NOT NULL,
+	`dewormer_id` integer NOT NULL,
 	`application_date` text,
-	FOREIGN KEY (`id_pet`) REFERENCES `pet`(`id`) ON UPDATE no action ON DELETE no action
+	FOREIGN KEY (`id_pet`) REFERENCES `pet`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`dewormer_id`) REFERENCES `dewormer`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
 CREATE TABLE `pet_to_client` (
@@ -227,9 +249,11 @@ CREATE TABLE `pet_to_client` (
 CREATE TABLE `pet_vaccination` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`pet_id` integer NOT NULL,
+	`vaccine_id` integer NOT NULL,
 	`application_date` text,
 	`observations` text,
-	FOREIGN KEY (`pet_id`) REFERENCES `pet`(`id`) ON UPDATE no action ON DELETE no action
+	FOREIGN KEY (`pet_id`) REFERENCES `pet`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`vaccine_id`) REFERENCES `vaccine`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
 CREATE TABLE `physical_exam` (
@@ -267,12 +291,20 @@ CREATE TABLE `prescription` (
 CREATE TABLE `prescription_item` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`prescription_id` integer NOT NULL,
+	`medicine_id` integer NOT NULL,
+	`product_id` integer NOT NULL,
+	`vaccine_id` integer NOT NULL,
+	`dewormer_id` integer NOT NULL,
 	`amount` real DEFAULT 0,
 	`frequency` text,
 	`duration` text,
 	`recommendations` text,
 	`type` text,
-	FOREIGN KEY (`prescription_id`) REFERENCES `prescription`(`id`) ON UPDATE no action ON DELETE no action
+	FOREIGN KEY (`prescription_id`) REFERENCES `prescription`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`medicine_id`) REFERENCES `medicine`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`product_id`) REFERENCES `product`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`vaccine_id`) REFERENCES `vaccine`(`id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`dewormer_id`) REFERENCES `dewormer`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
 CREATE TABLE `product` (
@@ -394,16 +426,6 @@ CREATE TABLE `valve_and_ohthalmic_exam` (
 	`right_eye` text DEFAULT '[]',
 	`left_ear` text DEFAULT '[]',
 	`right_ear` text DEFAULT '[]',
-	FOREIGN KEY (`consultation_id`) REFERENCES `consultation`(`id`) ON UPDATE no action ON DELETE no action
-);
---> statement-breakpoint
-CREATE TABLE `laboratory_order` (
-	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-	`provider_id` integer NOT NULL,
-	`consultation_id` integer NOT NULL,
-	`results_priority` text,
-	`deadline_date` text,
-	FOREIGN KEY (`provider_id`) REFERENCES `provider`(`id`) ON UPDATE no action ON DELETE no action,
 	FOREIGN KEY (`consultation_id`) REFERENCES `consultation`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint

@@ -7,9 +7,8 @@ import {
   uniqueIndex,
   index,
 } from 'drizzle-orm/sqlite-core';
-import { dewormerSupplier } from './dewormerSupplier';
-import { cartItem } from './cartItem';
-import { petDeworming } from './petDeworming';
+
+import { dewormerSupplier, cartItem, petDeworming } from './';
 
 export const dewormer = sqliteTable(
   'dewormer',
@@ -43,8 +42,6 @@ export const dewormer = sqliteTable(
     };
   }
 );
-
-// index('dewormer').on(dewormer.lot);
 
 export type InsertDewormer = typeof dewormer.$inferInsert;
 export type SelectDewormer = typeof dewormer.$inferSelect;

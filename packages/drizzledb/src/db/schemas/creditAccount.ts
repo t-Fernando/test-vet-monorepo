@@ -1,6 +1,7 @@
-import { blob, integer, real, sqliteTable } from 'drizzle-orm/sqlite-core';
-import { client } from '.';
 import { relations } from 'drizzle-orm';
+import { blob, integer, real, sqliteTable } from 'drizzle-orm/sqlite-core';
+
+import { client } from './';
 
 export const creditAccount = sqliteTable('credit_account', {
   accountNumber: blob('account_number', { mode: 'bigint' }).primaryKey(),

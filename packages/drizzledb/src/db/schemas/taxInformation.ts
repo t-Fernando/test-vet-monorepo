@@ -1,6 +1,7 @@
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
-import { client } from '.';
 import { relations } from 'drizzle-orm';
+import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+
+import { client } from './';
 
 export const taxInformation = sqliteTable('tax_information', {
   id: integer('id').primaryKey({ autoIncrement: true }),

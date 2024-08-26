@@ -1,6 +1,7 @@
-import { integer, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
-import { ticket } from '.';
 import { relations } from 'drizzle-orm';
+import { integer, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+
+import { ticket } from './';
 
 export const paymentHistory = sqliteTable('payment_history', {
   id: integer('id').primaryKey({ autoIncrement: true }),

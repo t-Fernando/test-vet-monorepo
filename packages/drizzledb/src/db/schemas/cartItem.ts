@@ -1,16 +1,25 @@
-import { integer, real, sqliteTable } from 'drizzle-orm/sqlite-core';
-import { ticket } from '.';
 import { relations } from 'drizzle-orm';
+import { integer, real, sqliteTable } from 'drizzle-orm/sqlite-core';
+
+import { dewormer, medicine, product, ticket, vaccine } from './';
 
 export const cartItem = sqliteTable('cart_item', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   ticketId: integer('ticket_id')
     .references(() => ticket.id)
     .notNull(),
-  //TODO: medicineId
-  //TODO: productId
-  //TODO: vaccineId
-  //TODO: dewormerId
+  medicineId: integer('medicine_id')
+    .references(() => medicine.id)
+    .notNull(),
+  productId: integer('product_id')
+    .references(() => product.id)
+    .notNull(),
+  vaccineId: integer('vaccine_id')
+    .references(() => vaccine.id)
+    .notNull(),
+  dewormerId: integer('dewormer_id')
+    .references(() => dewormer.id)
+    .notNull(),
   quantity: integer('quantity').default(0),
   price: real('price').default(0),
   debt: real('debt').default(0),
@@ -26,6 +35,22 @@ export const cartItemRelations = relations(cartItem, ({ one }) => {
     ticket: one(ticket, {
       fields: [cartItem.ticketId],
       references: [ticket.id],
+    }),
+    medicine: one(medicine, {
+      fields: [cartItem.medicineId],
+      references: [medicine.id],
+    }),
+    product: one(product, {
+      fields: [cartItem.productId],
+      references: [product.id],
+    }),
+    vaccine: one(vaccine, {
+      fields: [cartItem.vaccineId],
+      references: [vaccine.id],
+    }),
+    dewormer: one(dewormer, {
+      fields: [cartItem.dewormerId],
+      references: [dewormer.id],
     }),
   };
 });

@@ -6,8 +6,8 @@ import {
   text,
   uniqueIndex,
 } from 'drizzle-orm/sqlite-core';
-import { appointment } from './appointment';
-import { consultation } from './consultation';
+
+import { appointment, consultation, prescription } from './';
 
 export type UserModules = 'clinic' | 'cash_desk' | 'agenda' | 'consultations';
 
@@ -45,5 +45,6 @@ export const userRelations = relations(user, ({ many }) => {
   return {
     appointment: many(appointment),
     consultation: many(consultation),
+    prescription: many(prescription),
   };
 });

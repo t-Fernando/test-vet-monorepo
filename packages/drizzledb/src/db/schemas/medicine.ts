@@ -1,8 +1,7 @@
 import { relations, sql } from 'drizzle-orm';
 import { sqliteTable, integer, text, real } from 'drizzle-orm/sqlite-core';
-import { medicineSupplier } from './medicineSupplier';
-import { cartItem } from './cartItem';
-import { prescriptionItem } from './prescriptionItem';
+
+import { medicineSupplier, cartItem, prescriptionItem } from './';
 
 export const medicine = sqliteTable('medicine', {
   id: integer('id').primaryKey({ autoIncrement: true }),

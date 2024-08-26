@@ -1,15 +1,19 @@
 import { relations } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+
 import {
   appointment,
   client,
+  laboratoryOrder,
+  medicalStudy,
   mucosalExam,
   pet,
   physicalExam,
+  prescription,
   ticket,
   user,
   valveAndOphthalmicExam,
-} from '.';
+} from './';
 
 export const consultation = sqliteTable('consultation', {
   id: integer('id').primaryKey({ autoIncrement: true }),
@@ -42,7 +46,6 @@ export const consultationRelations = relations(
   consultation,
   ({ one, many }) => {
     return {
-      ticket: many(ticket),
       pet: one(pet, {
         fields: [consultation.petId],
         references: [pet.id],
@@ -59,10 +62,15 @@ export const consultationRelations = relations(
         fields: [consultation.userId],
         references: [user.id],
       }),
+      ticket: many(ticket),
       physicalExam: many(physicalExam),
       damnitExam: many(physicalExam),
       valveAndOphthalmicExam: many(valveAndOphthalmicExam),
       mucosalExam: many(mucosalExam),
+      laboratoryOrder: many(laboratoryOrder),
+      medicalStudy: many(medicalStudy),
+      prescription: many(prescription),
+      consultation: many(consultation),
     };
   }
 );

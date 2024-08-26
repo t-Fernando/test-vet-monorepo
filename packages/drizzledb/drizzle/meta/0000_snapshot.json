@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "71a55d6f-0346-49a4-896a-d72c305121ac",
+  "id": "e50e4c66-2ce9-4abf-9411-f272874c76cc",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "accessory": {
@@ -214,6 +214,34 @@
           "notNull": true,
           "autoincrement": false
         },
+        "medicine_id": {
+          "name": "medicine_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "product_id": {
+          "name": "product_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "vaccine_id": {
+          "name": "vaccine_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "dewormer_id": {
+          "name": "dewormer_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "quantity": {
           "name": "quantity",
           "type": "integer",
@@ -263,6 +291,58 @@
           "tableTo": "ticket",
           "columnsFrom": [
             "ticket_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "cart_item_medicine_id_medicine_id_fk": {
+          "name": "cart_item_medicine_id_medicine_id_fk",
+          "tableFrom": "cart_item",
+          "tableTo": "medicine",
+          "columnsFrom": [
+            "medicine_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "cart_item_product_id_product_id_fk": {
+          "name": "cart_item_product_id_product_id_fk",
+          "tableFrom": "cart_item",
+          "tableTo": "product",
+          "columnsFrom": [
+            "product_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "cart_item_vaccine_id_vaccine_id_fk": {
+          "name": "cart_item_vaccine_id_vaccine_id_fk",
+          "tableFrom": "cart_item",
+          "tableTo": "vaccine",
+          "columnsFrom": [
+            "vaccine_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "cart_item_dewormer_id_dewormer_id_fk": {
+          "name": "cart_item_dewormer_id_dewormer_id_fk",
+          "tableFrom": "cart_item",
+          "tableTo": "dewormer",
+          "columnsFrom": [
+            "dewormer_id"
           ],
           "columnsTo": [
             "id"
@@ -531,6 +611,85 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
+    "damnit_exam": {
+      "name": "damnit_exam",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "consultation_id": {
+          "name": "consultation_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "degenerative_disorders": {
+          "name": "degenerative_disorders",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "eating_disorders": {
+          "name": "eating_disorders",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "metabolic_disorders": {
+          "name": "metabolic_disorders",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "neoplastic_disorders": {
+          "name": "neoplastic_disorders",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "infectious_diseases": {
+          "name": "infectious_diseases",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "traumatic_conditions": {
+          "name": "traumatic_conditions",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "damnit_exam_consultation_id_consultation_id_fk": {
+          "name": "damnit_exam_consultation_id_consultation_id_fk",
+          "tableFrom": "damnit_exam",
+          "tableTo": "consultation",
+          "columnsFrom": [
+            "consultation_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "dewormer": {
       "name": "dewormer",
       "columns": {
@@ -724,85 +883,6 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "damnit_exam": {
-      "name": "damnit_exam",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": true
-        },
-        "consultation_id": {
-          "name": "consultation_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "degenerative_disorders": {
-          "name": "degenerative_disorders",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "eating_disorders": {
-          "name": "eating_disorders",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "metabolic_disorders": {
-          "name": "metabolic_disorders",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "neoplastic_disorders": {
-          "name": "neoplastic_disorders",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "infectious_diseases": {
-          "name": "infectious_diseases",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "traumatic_conditions": {
-          "name": "traumatic_conditions",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "damnit_exam_consultation_id_consultation_id_fk": {
-          "name": "damnit_exam_consultation_id_consultation_id_fk",
-          "tableFrom": "damnit_exam",
-          "tableTo": "consultation",
-          "columnsFrom": [
-            "consultation_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
     "grooming": {
       "name": "grooming",
       "columns": {
@@ -855,6 +935,13 @@
           "notNull": false,
           "autoincrement": false
         },
+        "accesory_id": {
+          "name": "accesory_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "services": {
           "name": "services",
           "type": "text",
@@ -873,7 +960,92 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "grooming_accesory_id_accessory_id_fk": {
+          "name": "grooming_accesory_id_accessory_id_fk",
+          "tableFrom": "grooming",
+          "tableTo": "accessory",
+          "columnsFrom": [
+            "accesory_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "laboratory_order": {
+      "name": "laboratory_order",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "provider_id": {
+          "name": "provider_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "consultation_id": {
+          "name": "consultation_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "results_priority": {
+          "name": "results_priority",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "deadline_date": {
+          "name": "deadline_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "laboratory_order_provider_id_provider_id_fk": {
+          "name": "laboratory_order_provider_id_provider_id_fk",
+          "tableFrom": "laboratory_order",
+          "tableTo": "provider",
+          "columnsFrom": [
+            "provider_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "laboratory_order_consultation_id_consultation_id_fk": {
+          "name": "laboratory_order_consultation_id_consultation_id_fk",
+          "tableFrom": "laboratory_order",
+          "tableTo": "consultation",
+          "columnsFrom": [
+            "consultation_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -1472,6 +1644,13 @@
           "notNull": true,
           "autoincrement": false
         },
+        "dewormer_id": {
+          "name": "dewormer_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "application_date": {
           "name": "application_date",
           "type": "text",
@@ -1488,6 +1667,19 @@
           "tableTo": "pet",
           "columnsFrom": [
             "id_pet"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "pet_deworming_dewormer_id_dewormer_id_fk": {
+          "name": "pet_deworming_dewormer_id_dewormer_id_fk",
+          "tableFrom": "pet_deworming",
+          "tableTo": "dewormer",
+          "columnsFrom": [
+            "dewormer_id"
           ],
           "columnsTo": [
             "id"
@@ -1573,6 +1765,13 @@
           "notNull": true,
           "autoincrement": false
         },
+        "vaccine_id": {
+          "name": "vaccine_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "application_date": {
           "name": "application_date",
           "type": "text",
@@ -1596,6 +1795,19 @@
           "tableTo": "pet",
           "columnsFrom": [
             "pet_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "pet_vaccination_vaccine_id_vaccine_id_fk": {
+          "name": "pet_vaccination_vaccine_id_vaccine_id_fk",
+          "tableFrom": "pet_vaccination",
+          "tableTo": "vaccine",
+          "columnsFrom": [
+            "vaccine_id"
           ],
           "columnsTo": [
             "id"
@@ -1844,6 +2056,34 @@
           "notNull": true,
           "autoincrement": false
         },
+        "medicine_id": {
+          "name": "medicine_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "product_id": {
+          "name": "product_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "vaccine_id": {
+          "name": "vaccine_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "dewormer_id": {
+          "name": "dewormer_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "amount": {
           "name": "amount",
           "type": "real",
@@ -1889,6 +2129,58 @@
           "tableTo": "prescription",
           "columnsFrom": [
             "prescription_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "prescription_item_medicine_id_medicine_id_fk": {
+          "name": "prescription_item_medicine_id_medicine_id_fk",
+          "tableFrom": "prescription_item",
+          "tableTo": "medicine",
+          "columnsFrom": [
+            "medicine_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "prescription_item_product_id_product_id_fk": {
+          "name": "prescription_item_product_id_product_id_fk",
+          "tableFrom": "prescription_item",
+          "tableTo": "product",
+          "columnsFrom": [
+            "product_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "prescription_item_vaccine_id_vaccine_id_fk": {
+          "name": "prescription_item_vaccine_id_vaccine_id_fk",
+          "tableFrom": "prescription_item",
+          "tableTo": "vaccine",
+          "columnsFrom": [
+            "vaccine_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "prescription_item_dewormer_id_dewormer_id_fk": {
+          "name": "prescription_item_dewormer_id_dewormer_id_fk",
+          "tableFrom": "prescription_item",
+          "tableTo": "dewormer",
+          "columnsFrom": [
+            "dewormer_id"
           ],
           "columnsTo": [
             "id"
@@ -2728,77 +3020,6 @@
         "valve_and_ohthalmic_exam_consultation_id_consultation_id_fk": {
           "name": "valve_and_ohthalmic_exam_consultation_id_consultation_id_fk",
           "tableFrom": "valve_and_ohthalmic_exam",
-          "tableTo": "consultation",
-          "columnsFrom": [
-            "consultation_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "laboratory_order": {
-      "name": "laboratory_order",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": true
-        },
-        "provider_id": {
-          "name": "provider_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "consultation_id": {
-          "name": "consultation_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "results_priority": {
-          "name": "results_priority",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "deadline_date": {
-          "name": "deadline_date",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "laboratory_order_provider_id_provider_id_fk": {
-          "name": "laboratory_order_provider_id_provider_id_fk",
-          "tableFrom": "laboratory_order",
-          "tableTo": "provider",
-          "columnsFrom": [
-            "provider_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "laboratory_order_consultation_id_consultation_id_fk": {
-          "name": "laboratory_order_consultation_id_consultation_id_fk",
-          "tableFrom": "laboratory_order",
           "tableTo": "consultation",
           "columnsFrom": [
             "consultation_id"

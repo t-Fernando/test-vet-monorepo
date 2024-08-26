@@ -1,5 +1,6 @@
 import { relations, sql } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+
 import { consultation } from './';
 
 export const valveAndOphthalmicExam = sqliteTable('valve_and_ohthalmic_exam', {

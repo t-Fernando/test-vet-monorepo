@@ -1,5 +1,6 @@
 import { relations } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+
 import {
   appointment,
   consultation,
@@ -7,7 +8,7 @@ import {
   petToClient,
   taxInformation,
   ticket,
-} from '.';
+} from './';
 
 export const client = sqliteTable('client', {
   id: integer('id').primaryKey({ autoIncrement: true }),

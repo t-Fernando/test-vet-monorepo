@@ -1,6 +1,7 @@
 import { relations, sql } from 'drizzle-orm';
 import { integer, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
-import { client, consultation, pet, reminder, user } from '.';
+
+import { client, consultation, pet, reminder, user } from './';
 
 export const appointment = sqliteTable('appointment', {
   id: integer('id').primaryKey({ autoIncrement: true }),

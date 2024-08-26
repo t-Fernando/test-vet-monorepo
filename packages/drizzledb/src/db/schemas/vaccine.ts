@@ -7,10 +7,13 @@ import {
   uniqueIndex,
   index,
 } from 'drizzle-orm/sqlite-core';
-import { petVaccination } from './petVaccination';
-import { prescriptionItem } from './prescriptionItem';
-import { vaccineSupplier } from './vaccineSupplier';
-import { cartItem } from './cartItem';
+
+import {
+  petVaccination,
+  prescriptionItem,
+  vaccineSupplier,
+  cartItem,
+} from './';
 
 export const vaccine = sqliteTable(
   'vaccine',
