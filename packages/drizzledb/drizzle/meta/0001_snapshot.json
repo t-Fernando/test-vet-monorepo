@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "161f0a9b-0551-4936-9f31-894b7849cf09",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "54b36242-fedd-4aee-9197-8c2cbe2c5905",
+  "prevId": "161f0a9b-0551-4936-9f31-894b7849cf09",
   "tables": {
     "accessory": {
       "name": "accessory",
@@ -2847,6 +2847,43 @@
         },
         "email": {
           "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public_medicine": {
+      "name": "public_medicine",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "type": {
+          "name": "type",
           "type": "text",
           "primaryKey": false,
           "notNull": false,

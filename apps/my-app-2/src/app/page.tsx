@@ -1,14 +1,4 @@
 import Link from "next/link";
-import { db } from "@repo/drizzledb/db";
-import {
-  client,
-  pet,
-  petToClient,
-  user,
-  appointment,
-} from "@repo/drizzledb/schema";
-import { createClient } from "@tursodatabase/api";
-import { env } from "~/env";
 
 //! add this to void horrible next cache ):
 export const dynamic = "force-dynamic";
@@ -22,14 +12,6 @@ export default async function HomePage() {
   // const instances = await turso.databases.list();
   // console.log(instances);
 
-  // await db.insert(client).values({
-  //   contactMethid: "whatsapp",
-  //   email: "troy@email.com",
-  //   fullName: "Troy Gomez",
-  //   phone: "7717029729",
-  // });
-  const data = await db.select().from(client).all();
-  console.log({ data });
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">

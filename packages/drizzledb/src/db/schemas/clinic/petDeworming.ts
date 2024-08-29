@@ -1,16 +1,17 @@
 import { relations } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-import { dewormer, pet } from './';
+import { pet } from './';
+import { restockDewormer } from './restockDewormer';
 
 export const petDeworming = sqliteTable('pet_deworming', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   idPet: integer('id_pet')
     .references(() => pet.id)
     .notNull(),
-  dewormerId: integer('dewormer_id')
+  dewormerId: integer('restock_dewormer_id')
     .notNull()
-    .references(() => dewormer.id),
+    .references(() => restockDewormer.id),
   applicationDate: text('application_date'),
 });
 export type InsertPetDeworming = typeof petDeworming.$inferInsert;
@@ -22,9 +23,9 @@ export const petDewormingRelations = relations(petDeworming, ({ one }) => {
       fields: [petDeworming.idPet],
       references: [pet.id],
     }),
-    dewormer: one(dewormer, {
+    restockDewormer: one(restockDewormer, {
       fields: [petDeworming.dewormerId],
-      references: [dewormer.id],
+      references: [restockDewormer.id],
     }),
   };
 });

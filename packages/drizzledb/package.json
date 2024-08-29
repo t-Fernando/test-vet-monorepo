@@ -4,7 +4,8 @@
   "private": true,
   "exports": {
     "./db": "./src/db/index.ts",
-    "./schema": "./src/db/schemas/index.ts"
+    "./clinic-schema": "./src/db/schemas/clinic/index.ts",
+    "./public-schema": "./src/db/schemas/public/index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",

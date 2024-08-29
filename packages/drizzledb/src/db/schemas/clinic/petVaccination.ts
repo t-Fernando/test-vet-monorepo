@@ -1,16 +1,17 @@
 import { relations } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-import { pet, vaccine } from './';
+import { pet } from './';
+import { restockVaccine } from './restockVaccine';
 
 export const petVaccination = sqliteTable('pet_vaccination', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   petId: integer('pet_id')
     .references(() => pet.id)
     .notNull(),
-  vaccineId: integer('vaccine_id')
+  restockVaccineId: integer('restock_vaccine_id')
     .notNull()
-    .references(() => vaccine.id),
+    .references(() => restockVaccine.id),
   applicationDate: text('application_date'),
   observations: text('observations'),
 });
@@ -23,9 +24,9 @@ export const petVaccinationRelations = relations(petVaccination, ({ one }) => {
       fields: [petVaccination.petId],
       references: [pet.id],
     }),
-    vaccine: one(vaccine, {
-      fields: [petVaccination.vaccineId],
-      references: [vaccine.id],
+    restockVaccine: one(restockVaccine, {
+      fields: [petVaccination.restockVaccineId],
+      references: [restockVaccine.id],
     }),
   };
 });

@@ -8,23 +8,14 @@ export const prescriptionItem = sqliteTable('prescription_item', {
   prescriptionId: integer('prescription_id')
     .references(() => prescription.id)
     .notNull(),
-  medicineId: integer('medicine_id')
-    .notNull()
-    .references(() => medicine.id),
-  productId: integer('product_id')
-    .notNull()
-    .references(() => product.id),
-  vaccineId: integer('vaccine_id')
-    .references(() => vaccine.id)
-    .notNull(),
-  dewormerId: integer('dewormer_id')
-    .references(() => dewormer.id)
-    .notNull(),
+  itemId: integer('item_id').notNull(), // references to medicine, product, vaccine, or dewormer
+  type: text('type', {
+    enum: ['medicine', 'product', 'vaccine', 'dewormer'],
+  }).notNull(),
   amount: real('amount').default(0), //! changed from text to real
   frequency: text('frequency'),
   duration: text('duration'),
   recommendations: text('recommendations'),
-  type: text('type', { enum: ['medicine', 'product', 'vaccine', 'dewormer'] }),
 });
 
 export type InsertPrescriptionItem = typeof prescriptionItem.$inferInsert;
@@ -39,19 +30,19 @@ export const prescriptionItemRelations = relations(
         references: [prescription.id],
       }),
       medicine: one(medicine, {
-        fields: [prescriptionItem.medicineId],
+        fields: [prescriptionItem.itemId],
         references: [medicine.id],
       }),
       product: one(product, {
-        fields: [prescriptionItem.productId],
+        fields: [prescriptionItem.itemId],
         references: [product.id],
       }),
       vaccine: one(vaccine, {
-        fields: [prescriptionItem.vaccineId],
+        fields: [prescriptionItem.itemId],
         references: [vaccine.id],
       }),
       dewormer: one(dewormer, {
-        fields: [prescriptionItem.dewormerId],
+        fields: [prescriptionItem.itemId],
         references: [dewormer.id],
       }),
     };
