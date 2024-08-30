@@ -1,4 +1,4 @@
-import { desc, relations, sql } from 'drizzle-orm';
+import { relations, sql } from 'drizzle-orm';
 import { sqliteTable, integer, text, real } from 'drizzle-orm/sqlite-core';
 import { dewormer } from '../clinic';
 
@@ -7,11 +7,11 @@ export const publicDewormer = sqliteTable('public_dewormer', {
   name: text('name').notNull(),
   description: text('description'),
   type: text('type', { enum: ['healing', 'maintenance'] }),
-  // applicationPeriod: text('application_period'),
-  // suggestedPrice: real('suggested_price').default(0),
-  // categoriesIds: text('categories_ids', { mode: 'json' })
-  //   .$type<string[]>()
-  //   .default(sql`'[]'`), // not a real relationship, just a list of ids
+  applicationPeriod: text('application_period'),
+  suggestedPrice: real('suggested_price').default(0),
+  categoriesIds: text('categories_ids', { mode: 'json' })
+    .$type<string[]>()
+    .default(sql`'[]'`), // not a real relationship, just a list of ids
 });
 
 export type InsertPublicDewormer = typeof publicDewormer.$inferInsert;

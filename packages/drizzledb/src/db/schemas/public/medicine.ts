@@ -7,20 +7,20 @@ export const publicMedicine = sqliteTable('public_medicine', {
   name: text('name'),
   description: text('description'),
   type: text('type', { enum: ['healing', 'maintenance'] }),
-  // satKey: text('sat_key'),
-  // barcode: text('barcode'),
-  // categoriesIds: text('categories_ids', { mode: 'json' })
-  //   .$type<string[]>()
-  //   .default(sql`'[]'`),
-  // sku: text('sku'),
-  // image: text('image'),
-  // searchKeywords: text('search_keywords', { mode: 'json' }).default(sql`'[]'`),
-  // controlled: integer('controlled', { mode: 'boolean' }),
-  // similarMedications: text('similar_medications', { mode: 'json' }).default(
-  //   sql`'[]'`
-  // ),
-  // activeIngredients: text('active_ingredients'),
-  // suggestedPrice: real('suggested_price').default(0),
+  satKey: text('sat_key'),
+  barcode: text('barcode'),
+  categoriesIds: text('categories_ids', { mode: 'json' })
+    .$type<string[]>()
+    .default(sql`'[]'`), // not a real relation but an array of categoryIds
+  sku: text('sku'),
+  image: text('image'),
+  searchKeywords: text('search_keywords', { mode: 'json' }).default(sql`'[]'`),
+  controlled: integer('controlled', { mode: 'boolean' }),
+  similarMedications: text('similar_medications', { mode: 'json' }).default(
+    sql`'[]'`
+  ),
+  activeIngredients: text('active_ingredients'),
+  suggestedPrice: real('suggested_price').default(0),
 });
 
 export type InsertPublicMedicine = typeof publicMedicine.$inferInsert;

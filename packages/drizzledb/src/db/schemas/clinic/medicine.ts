@@ -56,10 +56,7 @@ export type SelectMedicine = typeof medicine.$inferSelect;
 export const medicineRelations = relations(medicine, ({ one, many }) => {
   return {
     restockMedicine: many(restockMedicine),
-    restockItem: one(restockItem, {
-      fields: [medicine.id],
-      references: [restockItem.id],
-    }),
+    restockItem: many(restockItem),
     medicineSimilarities: many(medicineSimilarities),
     publicMedicine: one(publicMedicine, {
       fields: [medicine.publicMedicineId],

@@ -390,6 +390,16 @@ CREATE TABLE `valve_and_ohthalmic_exam` (
 	FOREIGN KEY (`consultation_id`) REFERENCES `consultation`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
+CREATE TABLE `public_brand` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`name` text
+);
+--> statement-breakpoint
+CREATE TABLE `public_category` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`name` text
+);
+--> statement-breakpoint
 CREATE TABLE `public_clinic` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`name` text NOT NULL,
@@ -401,7 +411,10 @@ CREATE TABLE `public_dewormer` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`name` text NOT NULL,
 	`description` text,
-	`type` text
+	`type` text,
+	`application_period` text,
+	`suggested_price` real DEFAULT 0,
+	`categories_ids` text DEFAULT '[]'
 );
 --> statement-breakpoint
 CREATE TABLE `public_laboratory` (
@@ -410,6 +423,23 @@ CREATE TABLE `public_laboratory` (
 	`address` text,
 	`phone` text,
 	`email` text
+);
+--> statement-breakpoint
+CREATE TABLE `public_medicine` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`name` text,
+	`description` text,
+	`type` text,
+	`sat_key` text,
+	`barcode` text,
+	`categories_ids` text DEFAULT '[]',
+	`sku` text,
+	`image` text,
+	`search_keywords` text DEFAULT '[]',
+	`controlled` integer,
+	`similar_medications` text DEFAULT '[]',
+	`active_ingredients` text,
+	`suggested_price` real DEFAULT 0
 );
 --> statement-breakpoint
 CREATE TABLE `public_owner` (
@@ -432,6 +462,22 @@ CREATE TABLE `public_payment` (
 	FOREIGN KEY (`subscription_id`) REFERENCES `public_subscription`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
+CREATE TABLE `public_product` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`name` text NOT NULL,
+	`description` text,
+	`type` text DEFAULT 'other',
+	`sat_key` text,
+	`brand_id` integer NOT NULL,
+	`barcode` text,
+	`categories_ids` text DEFAULT '[]',
+	`sku` text,
+	`image` text,
+	`search_keywords` text DEFAULT '[]',
+	`similar_products` text DEFAULT '[]',
+	FOREIGN KEY (`brand_id`) REFERENCES `public_brand`(`id`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
 CREATE TABLE `public_subscription` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`name` text NOT NULL,
@@ -443,7 +489,17 @@ CREATE TABLE `public_vaccine` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`name` text,
 	`description` text,
-	`type` text
+	`type` text,
+	`sat_key` text,
+	`barcode` text,
+	`categories_ids` text DEFAULT '[]',
+	`sku` text,
+	`image` text,
+	`search_keywords` text DEFAULT '[]',
+	`controlled` integer,
+	`similar_vaccines` text DEFAULT '[]',
+	`active_ingredients` text,
+	`suggested_price` real DEFAULT 0
 );
 --> statement-breakpoint
 CREATE UNIQUE INDEX `dewormer_idx` ON `dewormer` (`id`);--> statement-breakpoint
