@@ -7,14 +7,16 @@ import {
   uniqueIndex,
 } from 'drizzle-orm/sqlite-core';
 
-import { appointment, consultation, prescription } from './';
+// import { appointment, consultation, prescription } from './';
 
 export type UserModules = 'clinic' | 'cash_desk' | 'agenda' | 'consultations';
 
 export const user = sqliteTable(
   'user',
   {
-    id: integer('id').primaryKey({ autoIncrement: true }),
+    id: text('id')
+      .primaryKey()
+      .$default(() => sql`uuid4()`),
     fullName: text('full_name').notNull(),
     email: text('email').notNull().unique(),
     password: text('password').notNull(),
@@ -41,10 +43,10 @@ export type SelectUser = typeof user.$inferSelect;
 
 //TODO: relation to Consultation y Prescription(with userId? ask Dan)
 
-export const userRelations = relations(user, ({ many }) => {
-  return {
-    appointment: many(appointment),
-    consultation: many(consultation),
-    prescription: many(prescription),
-  };
-});
+// export const userRelations = relations(user, ({ many }) => {
+//   return {
+//     appointment: many(appointment),
+//     consultation: many(consultation),
+//     prescription: many(prescription),
+//   };
+// });

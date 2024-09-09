@@ -7,11 +7,11 @@ import {
   uniqueIndex,
   index,
 } from 'drizzle-orm/sqlite-core';
-import { publicVaccine } from '../public';
-import { restockItem } from './restockItem';
-import { vaccineSimilarities } from './vaccineSimilarities';
-import { restockVaccine } from './restockVaccine';
-import { prescriptionItem } from './prescriptionItem';
+// import { publicVaccine } from '../public';
+// import { restockItem } from './restockItem';
+// import { vaccineSimilarities } from './vaccineSimilarities';
+// import { restockVaccine } from './restockVaccine';
+// import { prescriptionItem } from './prescriptionItem';
 
 // import {
 //   petVaccination,
@@ -29,10 +29,12 @@ export type Stock = {
 export const vaccine = sqliteTable(
   'vaccine',
   {
-    id: integer('id').primaryKey({ autoIncrement: true }),
-    publicVaccineId: integer('public_vaccine_id').references(
-      () => publicVaccine.id
-    ),
+    id: text('id')
+      .primaryKey()
+      .$default(() => sql`uuid4()`),
+    // publicVaccineId: integer('public_vaccine_id').references(
+    //   () => publicVaccine.id
+    // ),
     name: text('name').notNull(),
     description: text('description'),
     type: text('type', { enum: ['healing', 'maintenance'] }),
@@ -48,7 +50,6 @@ export const vaccine = sqliteTable(
   (table) => {
     return {
       vaccineIdx: uniqueIndex('vaccine_idx').on(table.id),
-      publicVaccineIdx: index('poblic_vaccine_idx').on(table.publicVaccineId),
     };
   }
 );
@@ -56,15 +57,15 @@ export const vaccine = sqliteTable(
 export type InsertVaccine = typeof vaccine.$inferInsert;
 export type SelectVaccine = typeof vaccine.$inferSelect;
 
-export const vaccineRelations = relations(vaccine, ({ one, many }) => {
-  return {
-    restockItem: many(restockItem),
-    vaccineSimilarities: many(vaccineSimilarities),
-    publicVaccine: one(publicVaccine, {
-      fields: [vaccine.publicVaccineId],
-      references: [publicVaccine.id],
-    }),
-    restockVaccine: many(restockVaccine),
-    prescriptionItem: many(prescriptionItem),
-  };
-});
+// export const vaccineRelations = relations(vaccine, ({ one, many }) => {
+//   return {
+//     restockItem: many(restockItem),
+//     vaccineSimilarities: many(vaccineSimilarities),
+//     publicVaccine: one(publicVaccine, {
+//       fields: [vaccine.publicVaccineId],
+//       references: [publicVaccine.id],
+//     }),
+//     restockVaccine: many(restockVaccine),
+//     prescriptionItem: many(prescriptionItem),
+//   };
+// });

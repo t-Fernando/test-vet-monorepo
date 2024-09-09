@@ -1,7 +1,10 @@
+import { sql } from 'drizzle-orm';
 import { sqliteTable, integer, text } from 'drizzle-orm/sqlite-core';
 
 export const publicLaboratory = sqliteTable('public_laboratory', {
-  id: integer('id').primaryKey({ autoIncrement: true }),
+  id: text('id')
+    .primaryKey()
+    .$default(() => sql`uuid4()`),
   name: text('name'),
   address: text('address'),
   phone: text('phone'),

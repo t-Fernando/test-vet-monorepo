@@ -1,11 +1,13 @@
 import { relations, sql } from 'drizzle-orm';
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
-import { publicOwner, publicPayment } from './';
+// import { publicOwner, publicPayment } from './';
 
 export type ClinicServiceType = 'clinic' | 'store' | 'groom' | 'lodgining';
 
 export const publicClinic = sqliteTable('public_clinic', {
-  id: integer('id').primaryKey({ autoIncrement: true }),
+  id: text('id')
+    .primaryKey()
+    .$default(() => sql`uuid4()`),
   name: text('name').notNull(),
   domain: text('domain').notNull(),
   services: text('services', { mode: 'json' })
@@ -16,9 +18,9 @@ export const publicClinic = sqliteTable('public_clinic', {
 export type InsertPublicClinic = typeof publicClinic.$inferInsert;
 export type SelectPublicClinic = typeof publicClinic.$inferSelect;
 
-export const publicClinicRelations = relations(publicClinic, ({ many }) => {
-  return {
-    publicOwner: many(publicOwner),
-    publicPayment: many(publicPayment),
-  };
-});
+// export const publicClinicRelations = relations(publicClinic, ({ many }) => {
+//   return {
+//     publicOwner: many(publicOwner),
+//     publicPayment: many(publicPayment),
+//   };
+// });

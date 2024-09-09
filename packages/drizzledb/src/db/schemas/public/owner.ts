@@ -4,17 +4,20 @@ import {
   text,
   uniqueIndex,
 } from 'drizzle-orm/sqlite-core';
-import { publicClinic } from './';
-import { relations } from 'drizzle-orm';
+// import { publicClinic } from './';
+import { relations, sql } from 'drizzle-orm';
 
 export const publicOwner = sqliteTable(
   'public_owner',
   {
-    id: integer('id').primaryKey({ autoIncrement: true }),
+    id: text('id')
+      .primaryKey()
+      .$default(() => sql`uuid4()`),
     email: text('email').unique().notNull(),
-    clinicId: integer('clinic_id')
-      .notNull()
-      .references(() => publicClinic.id),
+    // clinicId: integer('clinic_id')
+    //   .notNull()
+    //   .references(() => publicClinic.id),
+    //userId
     password: text('password').notNull(),
   },
   (table) => {
@@ -28,11 +31,11 @@ export const publicOwner = sqliteTable(
 export type InsertPublicOwner = typeof publicOwner.$inferInsert;
 export type SelectPublicOwner = typeof publicOwner.$inferSelect;
 
-export const publicOwnerRelations = relations(publicOwner, ({ one }) => {
-  return {
-    publicClinic: one(publicClinic, {
-      fields: [publicOwner.clinicId],
-      references: [publicClinic.id],
-    }),
-  };
-});
+// export const publicOwnerRelations = relations(publicOwner, ({ one }) => {
+//   return {
+//     publicClinic: one(publicClinic, {
+//       fields: [publicOwner.clinicId],
+//       references: [publicClinic.id],
+//     }),
+//   };
+// });

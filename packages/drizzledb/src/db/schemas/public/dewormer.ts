@@ -1,9 +1,11 @@
 import { relations, sql } from 'drizzle-orm';
 import { sqliteTable, integer, text, real } from 'drizzle-orm/sqlite-core';
-import { dewormer } from '../clinic';
+// import { dewormer } from '../clinic';
 
 export const publicDewormer = sqliteTable('public_dewormer', {
-  id: integer('id').primaryKey({ autoIncrement: true }),
+  id: text('id')
+    .primaryKey()
+    .$default(() => sql`uuid4()`),
   name: text('name').notNull(),
   description: text('description'),
   type: text('type', { enum: ['healing', 'maintenance'] }),
@@ -17,8 +19,8 @@ export const publicDewormer = sqliteTable('public_dewormer', {
 export type InsertPublicDewormer = typeof publicDewormer.$inferInsert;
 export type SelectPublicDewormer = typeof publicDewormer.$inferSelect;
 
-export const publicDewormerRelations = relations(publicDewormer, ({ many }) => {
-  return {
-    dewormer: many(dewormer),
-  };
-});
+// export const publicDewormerRelations = relations(publicDewormer, ({ many }) => {
+//   return {
+//     dewormer: many(dewormer),
+//   };
+// });
