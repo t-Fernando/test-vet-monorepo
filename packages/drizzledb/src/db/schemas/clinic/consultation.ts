@@ -1,5 +1,5 @@
-// import { relations } from 'drizzle-orm';
-// import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { relations, sql } from 'drizzle-orm';
+import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 // import {
 //   appointment,
@@ -15,32 +15,34 @@
 //   valveAndOphthalmicExam,
 // } from './';
 
-// export const consultation = sqliteTable('consultation', {
-//   id: integer('id').primaryKey({ autoIncrement: true }),
-//   reason: text('reason'),
-//   antecedents: text('antecedents'),
-//   treatmentAdministered: text('treatment_administered'),
-//   durationOfIllness: text('duration_of_illness'),
-//   notes: text('notes'),
-//   diagnosis: text('diagnosis'),
-//   therapeuticPlan: text('therapeutic_plan'),
-//   recommendations: text('recommendations'),
-//   createdAt: text('created_at').notNull(), //Date
-//   petId: integer('pet_id')
-//     .references(() => pet.id)
-//     .notNull(),
-//   clientId: integer('client_id')
-//     .references(() => client.id)
-//     .notNull(),
-//   appointmentId: integer('appointment_id')
-//     .references(() => appointment.id)
-//     .notNull(),
-//   userId: integer('user_id')
-//     .references(() => user.id)
-//     .notNull(),
-// });
-// export type InsertConsultation = typeof consultation.$inferInsert;
-// export type SelectConsultation = typeof consultation.$inferSelect;
+export const consultation = sqliteTable('consultation', {
+  id: text('id')
+    .primaryKey()
+    .$default(() => sql`uuid4()`),
+  reason: text('reason'),
+  antecedents: text('antecedents'),
+  treatmentAdministered: text('treatment_administered'),
+  durationOfIllness: text('duration_of_illness'),
+  notes: text('notes'),
+  diagnosis: text('diagnosis'),
+  therapeuticPlan: text('therapeutic_plan'),
+  recommendations: text('recommendations'),
+  createdAt: text('created_at').notNull(), //Date
+  // petId: integer('pet_id')
+  //   .references(() => pet.id)
+  //   .notNull(),
+  // clientId: integer('client_id')
+  //   .references(() => client.id)
+  //   .notNull(),
+  // appointmentId: integer('appointment_id')
+  //   .references(() => appointment.id)
+  //   .notNull(),
+  // userId: integer('user_id')
+  //   .references(() => user.id)
+  //   .notNull(),
+});
+export type InsertConsultation = typeof consultation.$inferInsert;
+export type SelectConsultation = typeof consultation.$inferSelect;
 
 // export const consultationRelations = relations(
 //   consultation,

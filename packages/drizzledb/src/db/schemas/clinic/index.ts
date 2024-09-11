@@ -45,8 +45,8 @@ export { petVaccination } from './petVaccination';
 export { taxInformation } from './taxInformation';
 
 //? CONSULTATION 5 Emilio
-// export { consultation } from './consultation';
-// export { physicalExam } from './physicalExam';
-// export { damnitExam } from './damnitExam';
-// export { valveAndOphthalmicExam } from './valveAndOphthalmicExam';
-// export { mucosalExam } from './mucosalExam';
+export { consultation } from './consultation';
+export { physicalExam } from './physicalExam';
+export { damnitExam } from './damnitExam';
+export { valveAndOphthalmicExam } from './valveAndOphthalmicExam';
+export { mucosalExam } from './mucosalExam';
