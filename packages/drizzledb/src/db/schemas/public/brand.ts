@@ -1,6 +1,6 @@
 import { relations, sql } from 'drizzle-orm';
-import { sqliteTable, integer, text } from 'drizzle-orm/sqlite-core';
-import { publicProduct } from './product';
+import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { publicProduct } from './';
 
 export const publicBrand = sqliteTable('public_brand', {
   id: text('id')
@@ -12,8 +12,8 @@ export const publicBrand = sqliteTable('public_brand', {
 export type InsertPublicBrand = typeof publicBrand.$inferInsert;
 export type SelectPublicBrand = typeof publicBrand.$inferSelect;
 
-// export const publicBrandRelations = relations(publicBrand, ({ many }) => {
-//   return {
-//     publicProduct: many(publicProduct),
-//   };
-// });
+export const publicBrandRelations = relations(publicBrand, ({ many }) => {
+  return {
+    publicProduct: many(publicProduct),
+  };
+});

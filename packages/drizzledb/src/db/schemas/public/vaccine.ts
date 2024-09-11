@@ -1,6 +1,6 @@
 import { relations, sql } from 'drizzle-orm';
 import { sqliteTable, integer, text, real } from 'drizzle-orm/sqlite-core';
-// import { vaccine } from '../clinic';
+import { vaccine } from '../clinic';
 
 export const publicVaccine = sqliteTable('public_vaccine', {
   id: text('id')
@@ -30,8 +30,8 @@ export const publicVaccine = sqliteTable('public_vaccine', {
 export type InsertPublicVaccine = typeof publicVaccine.$inferInsert;
 export type SelectPublicVaccine = typeof publicVaccine.$inferSelect;
 
-// export const publicVaccineRelations = relations(publicVaccine, ({ many }) => {
-//   return {
-//     vaccine: many(vaccine),
-//   };
-// });
+export const publicVaccineRelations = relations(publicVaccine, ({ many }) => {
+  return {
+    vaccine: many(vaccine),
+  };
+});

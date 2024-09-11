@@ -1,13 +1,13 @@
 import { relations, sql } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-// import {
-//   appointment,
-//   consultation,
-//   petDeworming,
-//   petToClient,
-//   petVaccination,
-// } from './';
+import {
+  appointment,
+  consultation,
+  petDeworming,
+  petToClient,
+  petVaccination,
+} from './';
 
 export type PetState = 'rescued' | 'deceased' | 'aggressiveness';
 
@@ -41,12 +41,12 @@ export const pet = sqliteTable('pet', {
 export type InsertPet = typeof pet.$inferInsert;
 export type SelectPet = typeof pet.$inferSelect;
 
-// export const petRelations = relations(pet, ({ many }) => {
-//   return {
-//     petDeworming: many(petDeworming),
-//     petVaccination: many(petVaccination),
-//     petToClient: many(petToClient),
-//     appointment: many(appointment),
-//     consultation: many(consultation),
-//   };
-// });
+export const petRelations = relations(pet, ({ many }) => {
+  return {
+    petDeworming: many(petDeworming),
+    petVaccination: many(petVaccination),
+    petToClient: many(petToClient),
+    appointment: many(appointment),
+    consultation: many(consultation),
+  };
+});

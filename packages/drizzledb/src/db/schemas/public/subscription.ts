@@ -14,11 +14,11 @@ export const publicSubscription = sqliteTable('public_subscription', {
 export type InsertPublicSubscription = typeof publicSubscription.$inferInsert;
 export type SelectPublicSubscription = typeof publicSubscription.$inferSelect;
 
-// export const publicSubscriptionRelations = relations(
-//   publicSubscription,
-//   ({ many }) => {
-//     return {
-//       publicPayment: many(publicPayment),
-//     };
-//   }
-// );
+export const publicSubscriptionRelations = relations(
+  publicSubscription,
+  ({ many }) => {
+    return {
+      publicPayment: many(publicPayment),
+    };
+  }
+);

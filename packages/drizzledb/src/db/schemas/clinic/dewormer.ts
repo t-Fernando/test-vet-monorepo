@@ -8,6 +8,9 @@ import {
   index,
 } from 'drizzle-orm/sqlite-core';
 import { publicDewormer } from '../public';
+import { restockDewormer } from './restockDewormer';
+import { itemSimilarities } from './itemSimilarities';
+import { prescriptionItem } from './prescriptionItem';
 // import { restockDewormer } from './restockDewormer';
 // import { restockItem } from './restockItem';
 // import { dewormerSimilarities } from './dewormerSimilarities';
@@ -19,49 +22,37 @@ export type Stock = {
   stock: number;
 };
 
-export const dewormer = sqliteTable(
-  'dewormer',
-  {
-    id: text('id')
-      .primaryKey()
-      .$default(() => sql`uuid4()`),
-    // publicDewormerId: integer('public_dewormer_id').references(
-    //   () => publicDewormer.id
-    // ),
-    laboratoryIds: text('laboratory_ids') // not a real relationship, just a list of laboratory ids
-      .default(sql`'[]'`)
-      .notNull(),
-    name: text('name').notNull(),
-    description: text('description'),
-    type: text('type', { enum: ['healing', 'maintenance'] }),
-    stockCount: integer('stock_count').default(0),
-    stock: text('stock')
-      .$type<Stock[]>()
-      .default(sql`'[]'`),
-    branch: text('branch'),
-    department: text('department'),
-    rack: text('rack'),
-    publicPrice: real('public_price').default(0),
-  },
-  (table) => {
-    return {
-      dewormerIdx: uniqueIndex('dewormer_idx').on(table.id),
-      // publicDewormerIdx: index('public_dewormer_idx').on(
-      //   table.publicDewormerId
-      // ),
-    };
-  }
-);
+export const dewormer = sqliteTable('dewormer', {
+  id: text('id')
+    .primaryKey()
+    .$default(() => sql`uuid4()`),
+  publicDewormerId: text('public_dewormer_id').references(
+    () => publicDewormer.id
+  ),
+  laboratoryIds: text('laboratory_ids') // not a real relationship, just a list of laboratory ids
+    .default(sql`'[]'`)
+    .notNull(),
+  name: text('name').notNull(),
+  description: text('description'),
+  type: text('type', { enum: ['healing', 'maintenance'] }),
+  stockCount: integer('stock_count').default(0),
+  stock: text('stock')
+    .$type<Stock[]>()
+    .default(sql`'[]'`),
+  branch: text('branch'),
+  department: text('department'),
+  rack: text('rack'),
+  publicPrice: real('public_price').default(0),
+});
 
-// export const dewormerRelations = relations(dewormer, ({ one, many }) => {
-//   return {
-//     restockDewormer: many(restockDewormer),
-//     restockItem: many(restockItem),
-//     dewormerSimilarities: many(dewormerSimilarities),
-//     publicDewormer: one(publicDewormer, {
-//       fields: [dewormer.publicDewormerId],
-//       references: [publicDewormer.id],
-//     }),
-//     prescriptionItem: many(prescriptionItem),
-//   };
-// });
+export const dewormerRelations = relations(dewormer, ({ one, many }) => {
+  return {
+    restockDewormer: many(restockDewormer),
+    itemSimilarities: many(itemSimilarities),
+    prescriptionItem: many(prescriptionItem),
+    publicDewormer: one(publicDewormer, {
+      fields: [dewormer.publicDewormerId],
+      references: [publicDewormer.id],
+    }),
+  };
+});

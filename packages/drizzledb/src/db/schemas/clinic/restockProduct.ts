@@ -2,6 +2,9 @@ import { sqliteTable, integer, text, real } from 'drizzle-orm/sqlite-core';
 import { product } from './product';
 // import { supplier } from './supplier';
 import { relations, sql } from 'drizzle-orm';
+import { restock } from './restock';
+import { cartItem } from './cartItem';
+import { accessory } from './accessory';
 // import { cartItem } from './cartItem';
 // import { accessory } from './accessory';
 
@@ -9,10 +12,12 @@ export const restockProduct = sqliteTable('restock_product', {
   id: text('id')
     .primaryKey()
     .$default(() => sql`uuid4()`),
-  // productId: integer('product_id')
-  //   .notNull()
-  //   .references(() => product.id),
-  // restockId
+  productId: text('product_id')
+    .notNull()
+    .references(() => product.id),
+  restockId: text('restock_id')
+    .notNull()
+    .references(() => restock.id),
   commercialName: text('commercial_name'),
   stock: real('stock').default(0),
   expirityDate: text('expirity_date'),
@@ -23,20 +28,20 @@ export const restockProduct = sqliteTable('restock_product', {
 export type InsertRestockProduct = typeof restockProduct.$inferInsert;
 export type SelectRestockProduct = typeof restockProduct.$inferSelect;
 
-// export const restockProductRelations = relations(
-//   restockProduct,
-//   ({ one, many }) => {
-//     return {
-//       product: one(product, {
-//         fields: [restockProduct.productId],
-//         references: [product.id],
-//       }),
-//       supplier: one(supplier, {
-//         fields: [restockProduct.supplierId],
-//         references: [supplier.id],
-//       }),
-//       cartItem: many(cartItem),
-//       accessory: many(accessory),
-//     };
-//   }
-// );
+export const restockProductRelations = relations(
+  restockProduct,
+  ({ one, many }) => {
+    return {
+      product: one(product, {
+        fields: [restockProduct.productId],
+        references: [product.id],
+      }),
+      restock: one(restock, {
+        fields: [restockProduct.restockId],
+        references: [restock.id],
+      }),
+      cartItem: many(cartItem),
+      accessory: many(accessory),
+    };
+  }
+);

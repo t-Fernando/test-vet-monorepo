@@ -1,15 +1,15 @@
 import { relations, sql } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-// import { consultation } from './';
+import { consultation } from './';
 
 export const valveAndOphthalmicExam = sqliteTable('valve_and_ohthalmic_exam', {
   id: text('id')
     .primaryKey()
     .$default(() => sql`uuid4()`),
-  // consultationId: integer('consultation_id')
-  //   .references(() => consultation.id)
-  //   .notNull(),
+  consultationId: text('consultation_id')
+    .references(() => consultation.id)
+    .notNull(),
   abdomen: text('abdomen'),
   skin: text('skin'),
   hair: text('hair'),
@@ -35,14 +35,14 @@ export type InsertValveAndOhthalmicExam =
 export type SelectValveAndOhthalmicExam =
   typeof valveAndOphthalmicExam.$inferSelect;
 
-// export const valveAndOphthalmicExamRelations = relations(
-//   valveAndOphthalmicExam,
-//   ({ one }) => {
-//     return {
-//       consultation: one(consultation, {
-//         fields: [valveAndOphthalmicExam.consultationId],
-//         references: [consultation.id],
-//       }),
-//     };
-//   }
-// );
+export const valveAndOphthalmicExamRelations = relations(
+  valveAndOphthalmicExam,
+  ({ one }) => {
+    return {
+      consultation: one(consultation, {
+        fields: [valveAndOphthalmicExam.consultationId],
+        references: [consultation.id],
+      }),
+    };
+  }
+);

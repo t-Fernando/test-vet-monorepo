@@ -1,7 +1,7 @@
 import { relations, sql } from 'drizzle-orm';
 import { sqliteTable, integer, text } from 'drizzle-orm/sqlite-core';
-// import { product } from '../clinic';
-// import { publicBrand } from './brand';
+import { publicBrand } from './';
+import { product } from '../clinic';
 
 export const publicProduct = sqliteTable('public_product', {
   id: text('id')
@@ -13,9 +13,9 @@ export const publicProduct = sqliteTable('public_product', {
     enum: ['simple', 'multiple'],
   }),
   satKey: text('sat_key'),
-  // brandId: integer('brand_id')
-  //   .notNull()
-  //   .references(() => publicBrand.id),
+  brandId: text('brand_id')
+    .notNull()
+    .references(() => publicBrand.id),
   barcode: text('barcode'),
   categoriesIds: text('categories_ids', { mode: 'json' })
     .$type<string[]>()
@@ -31,15 +31,15 @@ export const publicProduct = sqliteTable('public_product', {
 export type InsertPublicProduct = typeof publicProduct.$inferInsert;
 export type SelectPublicProduct = typeof publicProduct.$inferSelect;
 
-// export const publicProductRelations = relations(
-//   publicProduct,
-//   ({ many, one }) => {
-//     return {
-//       product: many(product),
-//       publicBrand: one(publicBrand, {
-//         fields: [publicProduct.brandId],
-//         references: [publicBrand.id],
-//       }),
-//     };
-//   }
-// );
+export const publicProductRelations = relations(
+  publicProduct,
+  ({ many, one }) => {
+    return {
+      product: many(product),
+      publicBrand: one(publicBrand, {
+        fields: [publicProduct.brandId],
+        references: [publicBrand.id],
+      }),
+    };
+  }
+);

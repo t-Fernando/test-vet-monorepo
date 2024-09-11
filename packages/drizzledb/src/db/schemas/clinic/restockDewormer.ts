@@ -1,6 +1,9 @@
 import { relations, sql } from 'drizzle-orm';
 import { sqliteTable, integer, text, real } from 'drizzle-orm/sqlite-core';
 import { dewormer } from './dewormer';
+import { restock } from './restock';
+import { cartItem } from './cartItem';
+import { petDeworming } from './petDeworming';
 // import { supplier } from './supplier';
 // import { restock } from './restock';
 // import { cartItem } from './cartItem';
@@ -10,10 +13,12 @@ export const restockDewormer = sqliteTable('restock_dewormer', {
   id: text('id')
     .primaryKey()
     .$default(() => sql`uuid4()`),
-  // dewormerId: integer('dewormer_id')
-  //   .notNull()
-  //   .references(() => dewormer.id),
-  // restockId
+  dewormerId: text('dewormer_id')
+    .notNull()
+    .references(() => dewormer.id),
+  restockId: text('restock_id')
+    .notNull()
+    .references(() => restock.id),
   commercialName: text('commercial_name'),
   stock: real('stock').default(0),
   lot: text('lot'),
@@ -25,20 +30,20 @@ export const restockDewormer = sqliteTable('restock_dewormer', {
 export type InsertRestockDewormer = typeof restockDewormer.$inferInsert;
 export type SelectRestockDewormer = typeof restockDewormer.$inferSelect;
 
-// export const restockDewormerRelations = relations(
-//   restockDewormer,
-//   ({ one, many }) => {
-//     return {
-//       dewormer: one(dewormer, {
-//         fields: [restockDewormer.dewormerId],
-//         references: [dewormer.id],
-//       }),
-//       supplier: one(supplier, {
-//         fields: [restockDewormer.supplierId],
-//         references: [supplier.id],
-//       }),
-//       cartItem: many(cartItem),
-//       petDeworming: many(petDeworming),
-//     };
-//   }
-// );
+export const restockDewormerRelations = relations(
+  restockDewormer,
+  ({ one, many }) => {
+    return {
+      dewormer: one(dewormer, {
+        fields: [restockDewormer.dewormerId],
+        references: [dewormer.id],
+      }),
+      restock: one(restock, {
+        fields: [restockDewormer.restockId],
+        references: [restock.id],
+      }),
+      cartItem: many(cartItem),
+      petDeworming: many(petDeworming),
+    };
+  }
+);

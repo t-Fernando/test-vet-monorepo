@@ -1,15 +1,15 @@
 import { relations, sql } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-// import { consultation } from './';
+import { consultation } from './';
 
 export const mucosalExam = sqliteTable('mucosal_exam', {
   id: text('id')
     .primaryKey()
     .$default(() => sql`uuid4()`),
-  // consultationId: integer('consultation_id')
-  //   .references(() => consultation.id)
-  //   .notNull(),
+  consultationId: text('consultation_id')
+    .references(() => consultation.id)
+    .notNull(),
   trachea: text('trachea'),
   lungFields: text('lung_fields'),
   heartRate: text('heart_rate'),
@@ -28,11 +28,11 @@ export const mucosalExam = sqliteTable('mucosal_exam', {
 export type InsertMucosalExam = typeof mucosalExam.$inferInsert;
 export type SelectMucosalExam = typeof mucosalExam.$inferSelect;
 
-// export const mucosalExamRelations = relations(mucosalExam, ({ one }) => {
-//   return {
-//     consultation: one(consultation, {
-//       fields: [mucosalExam.consultationId],
-//       references: [consultation.id],
-//     }),
-//   };
-// });
+export const mucosalExamRelations = relations(mucosalExam, ({ one }) => {
+  return {
+    consultation: one(consultation, {
+      fields: [mucosalExam.consultationId],
+      references: [consultation.id],
+    }),
+  };
+});

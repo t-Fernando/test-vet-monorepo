@@ -1,7 +1,7 @@
 import { relations, sql } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-// import { medicalStudy, laboratoryOrder } from './';
+import { medicalStudy, laboratoryOrder } from './';
 
 export const provider = sqliteTable('provider', {
   id: text('id')
@@ -13,9 +13,9 @@ export const provider = sqliteTable('provider', {
 export type InsertProvider = typeof provider.$inferInsert;
 export type SelectProvider = typeof provider.$inferSelect;
 
-// export const providerRelations = relations(provider, ({ many }) => {
-//   return {
-//     medicalStudy: many(medicalStudy),
-//     laboratoryOrder: many(laboratoryOrder),
-//   };
-// });
+export const providerRelations = relations(provider, ({ many }) => {
+  return {
+    medicalStudy: many(medicalStudy),
+    laboratoryOrder: many(laboratoryOrder),
+  };
+});

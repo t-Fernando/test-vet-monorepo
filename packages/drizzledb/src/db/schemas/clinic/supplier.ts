@@ -1,5 +1,6 @@
 import { relations, sql } from 'drizzle-orm';
 import { sqliteTable, integer, text } from 'drizzle-orm/sqlite-core';
+import { restock } from './restock';
 // import { restock } from './restock';
 // import { restockDewormer } from './restockDewormer';
 // import { restockMedicine } from './restockMedicine';
@@ -19,12 +20,8 @@ export const supplier = sqliteTable('supplier', {
 export type InsertSupplier = typeof supplier.$inferInsert;
 export type SelectSupplier = typeof supplier.$inferSelect;
 
-// export const supplierRelations = relations(supplier, ({ many }) => {
-//   return {
-//     restock: many(restock),
-//     restockDewormer: many(restockDewormer),
-//     restockMedicine: many(restockMedicine),
-//     restockProduct: many(restockProduct),
-//     restockVaccine: many(restockVaccine),
-//   };
-// });
+export const supplierRelations = relations(supplier, ({ many }) => {
+  return {
+    restock: many(restock),
+  };
+});

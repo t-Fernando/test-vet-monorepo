@@ -7,7 +7,8 @@ import {
   uniqueIndex,
 } from 'drizzle-orm/sqlite-core';
 
-// import { appointment, consultation, prescription } from './';
+import { appointment, consultation, prescription } from './';
+import { publicOwner } from '../public';
 
 export type UserModules = 'clinic' | 'cash_desk' | 'agenda' | 'consultations';
 
@@ -41,12 +42,17 @@ export const user = sqliteTable(
 export type InsertUser = typeof user.$inferInsert;
 export type SelectUser = typeof user.$inferSelect;
 
-//TODO: relation to Consultation y Prescription(with userId? ask Dan)
-
-// export const userRelations = relations(user, ({ many }) => {
-//   return {
-//     appointment: many(appointment),
-//     consultation: many(consultation),
-//     prescription: many(prescription),
-//   };
-// });
+export const userRelations = relations(user, ({ one, many }) => {
+  return {
+    publicOwner: one(publicOwner, {
+      fields: [user.id],
+      references: [publicOwner.userId],
+    }),
+    appointment: many(appointment),
+    consultation: many(consultation),
+    prescription: one(prescription, {
+      fields: [user.id],
+      references: [prescription.veterinarianId],
+    }),
+  };
+});
