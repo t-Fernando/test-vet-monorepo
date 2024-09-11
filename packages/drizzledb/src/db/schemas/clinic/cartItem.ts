@@ -1,5 +1,5 @@
-// import { relations } from 'drizzle-orm';
-// import { integer, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { relations, sql } from 'drizzle-orm';
+import { integer, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 // import { ticket } from './';
 // import { restockDewormer } from './restockDewormer';
@@ -7,24 +7,26 @@
 // import { restockVaccine } from './restockVaccine';
 // import { restockProduct } from './restockProduct';
 
-// export const cartItem = sqliteTable('cart_item', {
-//   id: integer('id').primaryKey({ autoIncrement: true }),
-//   ticketId: integer('ticket_id')
-//     .references(() => ticket.id)
-//     .notNull(),
-//   itemId: integer('item_id').notNull(), // references to restockMedicine, restockProduct, restockVaccine, or restockDewormer
-//   type: text('type', {
-//     enum: ['medicine', 'product', 'vaccine', 'dewormer'],
-//   }).notNull(),
-//   quantity: integer('quantity').default(0),
-//   price: real('price').default(0),
-//   debt: real('debt').default(0),
-//   deposit: real('deposit').default(0),
-//   remainingAmount: real('remaining_amount').default(0),
-// });
+export const cartItem = sqliteTable('cart_item', {
+  id: text('id')
+    .primaryKey()
+    .$default(() => sql`uuid4()`),
+  // ticketId: integer('ticket_id')
+  //   .references(() => ticket.id)
+  //   .notNull(),
+  itemId: text('item_id').notNull(), // references to restockMedicine, restockProduct, restockVaccine, or restockDewormer
+  type: text('type', {
+    enum: ['medicine', 'product', 'vaccine', 'dewormer'],
+  }).notNull(),
+  quantity: integer('quantity').default(0),
+  price: real('price').default(0),
+  debt: real('debt').default(0),
+  deposit: real('deposit').default(0),
+  remainingAmount: real('remaining_amount').default(0),
+});
 
-// export type InsertCartItem = typeof cartItem.$inferInsert;
-// export type SelectCartItem = typeof cartItem.$inferSelect;
+export type InsertCartItem = typeof cartItem.$inferInsert;
+export type SelectCartItem = typeof cartItem.$inferSelect;
 
 // export const cartItemRelations = relations(cartItem, ({ one }) => {
 //   return {

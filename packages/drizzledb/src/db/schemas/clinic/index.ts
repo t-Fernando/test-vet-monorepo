@@ -31,9 +31,9 @@ export { appointment } from './appointment';
 export { reminder } from './reminder';
 
 //? ACCOUNTS 3 Emilio
-// export { cartItem } from './cartItem';
-// export { paymentHistory } from './paymentHistory';
-// export { ticket } from './ticket';
+export { cartItem } from './cartItem';
+export { paymentHistory } from './paymentHistory';
+export { ticket } from './ticket';
 
 //? PET_CLIENT 7 Emilio
 // export { client } from './client';
