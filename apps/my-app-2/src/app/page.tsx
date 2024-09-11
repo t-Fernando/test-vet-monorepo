@@ -1,14 +1,15 @@
 import Link from "next/link";
+
+// import { inArray, eq, db, sql, type Database } from "@repo/drizzledb/db";
+// import { db } from "@repo/verceldb/db";
+// import { publicCategory, publicMedicine } from "@repo/drizzledb/public-schema";
+
 import { db } from "@repo/drizzledb/db";
 import {
-  client,
-  pet,
-  petToClient,
-  user,
-  appointment,
-} from "@repo/drizzledb/schema";
-import { createClient } from "@tursodatabase/api";
-import { env } from "~/env";
+  publicCategory,
+  publicMedicine,
+  publicVaccine,
+} from "@repo/drizzledb/public-schema";
 
 //! add this to void horrible next cache ):
 export const dynamic = "force-dynamic";
@@ -22,14 +23,31 @@ export default async function HomePage() {
   // const instances = await turso.databases.list();
   // console.log(instances);
 
-  // await db.insert(client).values({
-  //   contactMethid: "whatsapp",
-  //   email: "troy@email.com",
-  //   fullName: "Troy Gomez",
-  //   phone: "7717029729",
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call
+  // const statement = sql`
+  //   select
+  //     public_medicine.id,
+  //     public_medicine.name,
+  //     public_medicine.categories_ids,
+  //     public_category.name as categoryName
+  //   from
+  //     public_medicine
+  //   join
+  //     public_category on public_category.id in (select json_each.value from json_each(public_medicine.categories_ids))
+  //   where public_medicine.id = 2
+  // `;
+  // const res1: unknown[] = await db.all(statement);
+  // const res2: unknown = await db.get(statement);
+  // const res3: unknown[][] = await db.values(statement);
+  // const res4: Database.RunResult = await db.run(statement);
+
+  // console.log(res1);
+
+  // await db.insert(publicVaccine).values({
+  //   name: "Vaccine test",
+  //   searchKeywords: [""],
   // });
-  const data = await db.select().from(client).all();
-  console.log({ data });
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">

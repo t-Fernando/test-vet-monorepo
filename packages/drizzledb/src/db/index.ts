@@ -1,7 +1,8 @@
 import { createClient, type Client } from '@libsql/client';
 import { drizzle } from 'drizzle-orm/libsql';
 import { config } from 'dotenv';
-import * as schema from './schemas/pet';
+import * as clinicSchema from './schemas/clinic';
+import * as publicSchema from './schemas/public';
 
 config({ path: '.env' });
 
@@ -17,4 +18,9 @@ export const client =
   });
 if (process.env.NODE_ENV !== 'production') globalForDb.client = client;
 
-export const db = drizzle(client, { schema });
+export const db = drizzle(client, {
+  schema: {
+    ...clinicSchema,
+    ...publicSchema,
+  },
+});
