@@ -1,12 +1,6 @@
 import { relations, sql } from 'drizzle-orm';
-import { text, integer, real, sqliteTable } from 'drizzle-orm/sqlite-core';
-import { prescription } from './prescription';
-import { product } from './product';
-import { vaccine } from './vaccine';
-import { medicine } from './medicine';
-import { dewormer } from './dewormer';
-
-// import { dewormer, medicine, product, vaccine } from './';
+import { text, sqliteTable } from 'drizzle-orm/sqlite-core';
+import { dewormer, medicine, prescription, product, vaccine } from './';
 
 export const prescriptionItem = sqliteTable('prescription_item', {
   id: text('id')

@@ -1,8 +1,7 @@
 import { relations, sql } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-import { pet } from './';
-import { restockVaccine } from './restockVaccine';
+import { pet, restockVaccine } from './';
 
 export const petVaccination = sqliteTable('pet_vaccination', {
   id: text('id')

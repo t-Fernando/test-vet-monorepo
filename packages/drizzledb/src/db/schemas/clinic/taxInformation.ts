@@ -7,7 +7,7 @@ export const taxInformation = sqliteTable('tax_information', {
   id: text('id')
     .primaryKey()
     .$default(() => sql`uuid4()`),
-  clientId: integer('client_id')
+  clientId: text('client_id')
     .references(() => client.id)
     .notNull(),
   address: text('address').notNull(),

@@ -1,11 +1,11 @@
-//? CATALOG 5 Fer
+//? CATALOG
 export { itemSimilarities } from './itemSimilarities';
 export { medicine } from './medicine';
 export { dewormer } from './dewormer';
 export { product } from './product';
 export { vaccine } from './vaccine';
 
-//? INVENTORY MANAGEMENT 7 Fer
+//? INVENTORY MANAGEMENT
 export { restockMedicine } from './restockMedicine';
 export { restockVaccine } from './restockVaccine';
 export { restockDewormer } from './restockDewormer';
@@ -13,7 +13,7 @@ export { restockProduct } from './restockProduct';
 export { supplier } from './supplier';
 export { restock } from './restock';
 
-//? PRESCRIPTION 6 Fer
+//? PRESCRIPTION
 export { prescriptionItem } from './prescriptionItem';
 export { medicalFile } from './medicalFile';
 export { prescription } from './prescription';
@@ -24,18 +24,18 @@ export { provider } from './provider';
 //? USERS
 export { user } from './user';
 
-//? APPOINTMENTS 4 Emilio
+//? APPOINTMENTS
 export { accessory } from './accessory';
 export { grooming } from './grooming';
 export { appointment } from './appointment';
 export { reminder } from './reminder';
 
-//? ACCOUNTS 3 Emilio
+//? ACCOUNTS
 export { cartItem } from './cartItem';
 export { paymentHistory } from './paymentHistory';
 export { ticket } from './ticket';
 
-//? PET_CLIENT 7 Emilio
+//? PET_CLIENT
 export { client } from './client';
 export { creditAccount } from './creditAccount';
 export { pet } from './pet';
@@ -44,7 +44,7 @@ export { petToClient } from './petToClient';
 export { petVaccination } from './petVaccination';
 export { taxInformation } from './taxInformation';
 
-//? CONSULTATION 5 Emilio
+//? CONSULTATION
 export { consultation } from './consultation';
 export { physicalExam } from './physicalExam';
 export { damnitExam } from './damnitExam';

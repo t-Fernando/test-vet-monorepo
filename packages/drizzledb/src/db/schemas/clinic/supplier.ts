@@ -1,11 +1,6 @@
 import { relations, sql } from 'drizzle-orm';
-import { sqliteTable, integer, text } from 'drizzle-orm/sqlite-core';
-import { restock } from './restock';
-// import { restock } from './restock';
-// import { restockDewormer } from './restockDewormer';
-// import { restockMedicine } from './restockMedicine';
-// import { restockProduct } from './restockProduct';
-// import { restockVaccine } from './restockVaccine';
+import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { restock } from './';
 
 export const supplier = sqliteTable('supplier', {
   id: text('id')

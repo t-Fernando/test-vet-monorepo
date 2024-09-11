@@ -1,12 +1,6 @@
-import { sqliteTable, integer, text, real } from 'drizzle-orm/sqlite-core';
-import { product } from './product';
-// import { supplier } from './supplier';
+import { sqliteTable, text, real } from 'drizzle-orm/sqlite-core';
 import { relations, sql } from 'drizzle-orm';
-import { restock } from './restock';
-import { cartItem } from './cartItem';
-import { accessory } from './accessory';
-// import { cartItem } from './cartItem';
-// import { accessory } from './accessory';
+import { accessory, cartItem, product, restock } from './';
 
 export const restockProduct = sqliteTable('restock_product', {
   id: text('id')

@@ -1,11 +1,5 @@
 import { relations } from 'drizzle-orm';
-import {
-  blob,
-  integer,
-  real,
-  sqliteTable,
-  text,
-} from 'drizzle-orm/sqlite-core';
+import { blob, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 import { client } from './';
 

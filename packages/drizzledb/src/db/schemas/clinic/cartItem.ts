@@ -1,11 +1,13 @@
 import { relations, sql } from 'drizzle-orm';
 import { integer, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-import { ticket } from './';
-import { restockDewormer } from './restockDewormer';
-import { restockMedicine } from './restockMedicine';
-import { restockVaccine } from './restockVaccine';
-import { restockProduct } from './restockProduct';
+import {
+  restockDewormer,
+  restockMedicine,
+  restockProduct,
+  restockVaccine,
+  ticket,
+} from './';
 
 export const cartItem = sqliteTable('cart_item', {
   id: text('id')

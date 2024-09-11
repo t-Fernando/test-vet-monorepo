@@ -1,20 +1,7 @@
 import { relations, sql } from 'drizzle-orm';
-import {
-  sqliteTable,
-  integer,
-  text,
-  real,
-  uniqueIndex,
-  index,
-} from 'drizzle-orm/sqlite-core';
+import { sqliteTable, integer, text, real } from 'drizzle-orm/sqlite-core';
 import { publicDewormer } from '../public';
-import { restockDewormer } from './restockDewormer';
-import { itemSimilarities } from './itemSimilarities';
-import { prescriptionItem } from './prescriptionItem';
-// import { restockDewormer } from './restockDewormer';
-// import { restockItem } from './restockItem';
-// import { dewormerSimilarities } from './dewormerSimilarities';
-// import { prescriptionItem } from './prescriptionItem';
+import { itemSimilarities, prescriptionItem, restockDewormer } from './';
 
 export type Stock = {
   // not a real relationship, just a list of restockDewormerIds

@@ -1,11 +1,5 @@
 import { relations, sql } from 'drizzle-orm';
-import {
-  index,
-  integer,
-  sqliteTable,
-  text,
-  uniqueIndex,
-} from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
 
 import { appointment, consultation, prescription } from './';
 import { publicOwner } from '../public';

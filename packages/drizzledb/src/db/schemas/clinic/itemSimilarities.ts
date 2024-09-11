@@ -1,9 +1,6 @@
 import { relations, sql } from 'drizzle-orm';
 import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
-import { dewormer } from './dewormer';
-import { vaccine } from './vaccine';
-import { product } from './product';
-import { medicine } from './medicine';
+import { dewormer, medicine, product, vaccine } from './';
 
 export const itemSimilarities = sqliteTable('item_similarities', {
   id: text('id')
