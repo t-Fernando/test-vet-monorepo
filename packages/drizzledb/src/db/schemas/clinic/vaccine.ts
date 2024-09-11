@@ -32,9 +32,10 @@ export const vaccine = sqliteTable(
     id: text('id')
       .primaryKey()
       .$default(() => sql`uuid4()`),
-    // publicVaccineId: integer('public_vaccine_id').references(
-    //   () => publicVaccine.id
-    // ),
+    laboratoryIds: text('laboratory_ids') // not a real relation but an array of laboratory ids
+      .default(sql`'[]'`)
+      .notNull(),
+    // publicVaccineId
     name: text('name').notNull(),
     description: text('description'),
     type: text('type', { enum: ['healing', 'maintenance'] }),
@@ -50,6 +51,7 @@ export const vaccine = sqliteTable(
   (table) => {
     return {
       vaccineIdx: uniqueIndex('vaccine_idx').on(table.id),
+      // publicVaccineIdx
     };
   }
 );

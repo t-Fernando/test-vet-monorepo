@@ -1,20 +1,19 @@
-//? CATALOG
-// export { itemSimilarities} from './itemSimilarities';
-// export { medicine } from './medicine';
-// export { dewormer } from './dewormer';
-// export { product } from './product';
+//? CATALOG 5 Fer
+export { itemSimilarities } from './itemSimilarities';
+export { medicine } from './medicine';
+export { dewormer } from './dewormer';
+export { product } from './product';
 export { vaccine } from './vaccine';
 
-//? INVENTORY MANAGEMENT
-// export { restockItem } from './restockItem';
-// export { restockMedicine } from './restockMedicine';
-// export { restockVaccine } from './restockVaccine';
-// export { restockDewormer } from './restockDewormer';
-// export { restockProduct } from './restockProduct';
-// export { supplier } from './supplier';
-// export { restock } from './restock';
+//? INVENTORY MANAGEMENT 7 Fer
+export { restockMedicine } from './restockMedicine';
+export { restockVaccine } from './restockVaccine';
+export { restockDewormer } from './restockDewormer';
+export { restockProduct } from './restockProduct';
+export { supplier } from './supplier';
+export { restock } from './restock';
 
-//? PRESCRIPTION
+//? PRESCRIPTION 6 Fer
 // export { prescriptionItem } from './prescriptionItem';
 // export { medicalFile } from './medicalFile';
 // export { prescription } from './prescription';
@@ -25,18 +24,18 @@ export { vaccine } from './vaccine';
 //? USERS
 export { user } from './user';
 
-//? APPOINTMENTS
+//? APPOINTMENTS 4 Emilio
 // export { accessory } from './accessory';
 // export { grooming } from './grooming';
 // export { appointment } from './appointment';
 // export { reminder } from './reminder';
 
-//? ACCOUNTS
+//? ACCOUNTS 3 Emilio
 // export { cartItem } from './cartItem';
 // export { paymentHistory } from './paymentHistory';
 // export { ticket } from './ticket';
 
-//? PET_CLIENT
+//? PET_CLIENT 7 Emilio
 // export { client } from './client';
 // export { creditAccount } from './creditAccount';
 // export { pet } from './pet';
@@ -45,7 +44,7 @@ export { user } from './user';
 // export { petVaccination } from './petVaccination';
 // export { taxInformation } from './taxInformation';
 
-//? CONSULTATION
+//? CONSULTATION 5 Emilio
 // export { consultation } from './consultation';
 // export { physicalExam } from './physicalExam';
 // export { damnitExam } from './damnitExam';

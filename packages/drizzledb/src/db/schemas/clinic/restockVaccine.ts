@@ -1,31 +1,28 @@
-// import { sqliteTable, text, integer, real } from 'drizzle-orm/sqlite-core';
-// import { vaccine } from './vaccine';
+import { sqliteTable, text, integer, real } from 'drizzle-orm/sqlite-core';
+import { vaccine } from './vaccine';
 // import { supplier } from './supplier';
-// import { relations, sql } from 'drizzle-orm';
+import { relations, sql } from 'drizzle-orm';
 // import { cartItem } from './cartItem';
 // import { petVaccination } from './petVaccination';
 
-// export const restockVaccine = sqliteTable('restock_vaccine', {
-//   id: integer('id').primaryKey({ autoIncrement: true }),
-//   vaccineId: integer('vaccine_id')
-//     .notNull()
-//     .references(() => vaccine.id),
-//   supplierId: integer('supplier_id')
-//     .notNull()
-//     .references(() => supplier.id),
-//   commercialName: text('commercial_name'),
-//   stock: real('stock').default(0),
-//   lot: text('lot'),
-//   expirityDate: text('expirity_date'), // Date
-//   purchasePrice: real('purchase_price').default(0),
-//   discountPercentage: real('discount_percentage').default(0),
-//   laboratoryIds: integer('laboratory_ids')
-//     .$type<number[]>()
-//     .default(sql`'[]'`),
-// });
+export const restockVaccine = sqliteTable('restock_vaccine', {
+  id: text('id')
+    .primaryKey()
+    .$default(() => sql`uuid4()`),
+  // vaccineId: integer('vaccine_id')
+  //   .notNull()
+  //   .references(() => vaccine.id),
+  // restockId
+  commercialName: text('commercial_name'),
+  stock: real('stock').default(0),
+  lot: text('lot'),
+  expirityDate: text('expirity_date'), // Date
+  purchasePrice: real('purchase_price').default(0),
+  discountPercentage: real('discount_percentage').default(0),
+});
 
-// export type InsertRestockVaccine = typeof restockVaccine.$inferInsert;
-// export type SelectRestockVaccine = typeof restockVaccine.$inferSelect;
+export type InsertRestockVaccine = typeof restockVaccine.$inferInsert;
+export type SelectRestockVaccine = typeof restockVaccine.$inferSelect;
 
 // export const restockVaccineRelations = relations(
 //   restockVaccine,
