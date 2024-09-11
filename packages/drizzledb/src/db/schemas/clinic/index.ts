@@ -36,13 +36,13 @@ export { paymentHistory } from './paymentHistory';
 export { ticket } from './ticket';
 
 //? PET_CLIENT 7 Emilio
-// export { client } from './client';
-// export { creditAccount } from './creditAccount';
-// export { pet } from './pet';
-// export { petDeworming } from './petDeworming';
+export { client } from './client';
+export { creditAccount } from './creditAccount';
+export { pet } from './pet';
+export { petDeworming } from './petDeworming';
 // export { petToClient } from './petToClient';
-// export { petVaccination } from './petVaccination';
-// export { taxInformation } from './taxInformation';
+export { petVaccination } from './petVaccination';
+export { taxInformation } from './taxInformation';
 
 //? CONSULTATION 5 Emilio
 // export { consultation } from './consultation';
