@@ -14,21 +14,21 @@ export { supplier } from './supplier';
 export { restock } from './restock';
 
 //? PRESCRIPTION 6 Fer
-// export { prescriptionItem } from './prescriptionItem';
-// export { medicalFile } from './medicalFile';
-// export { prescription } from './prescription';
-// export { laboratoryOrder } from './laboratoryOrder';
-// export { medicalStudy } from './medicalStudy';
-// export { provider } from './provider';
+export { prescriptionItem } from './prescriptionItem';
+export { medicalFile } from './medicalFile';
+export { prescription } from './prescription';
+export { laboratoryOrder } from './laboratoryOrder';
+export { medicalStudy } from './medicalStudy';
+export { provider } from './provider';
 
 //? USERS
 export { user } from './user';
 
 //? APPOINTMENTS 4 Emilio
-// export { accessory } from './accessory';
-// export { grooming } from './grooming';
-// export { appointment } from './appointment';
-// export { reminder } from './reminder';
+export { accessory } from './accessory';
+export { grooming } from './grooming';
+export { appointment } from './appointment';
+export { reminder } from './reminder';
 
 //? ACCOUNTS 3 Emilio
 // export { cartItem } from './cartItem';
